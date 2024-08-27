@@ -19,12 +19,12 @@ bool App::onInitalize() {
         
         // Test the camera class.
         LRT::Camera testCamera;
-        testCamera.SetPosition(qbVector<double>(std::vector<double>{0.0, 0.0, 0.0}));
-        testCamera.SetLookAt(qbVector<double>(std::vector<double>{0.0, 2.0, 0.0}));
-        testCamera.SetUp(qbVector<double>(std::vector<double>{0.0, 0.0, 1.0}));
-        testCamera.SetLength(1.0);
+        testCamera.SetPosition  (qbVector<double>(std::vector<double>{0.0, 0.0, 0.0} ) );
+        testCamera.SetLookAt    (qbVector<double>(std::vector<double>{0.0, 2.0, 0.0} ) );
+        testCamera.SetUp        (qbVector<double>(std::vector<double>{0.0, 0.0, 1.0} ) );
+        testCamera.SetLength  (1.0);
         testCamera.SetHorzSize(1.0);
-        testCamera.SetAspect(1.0);
+        testCamera.SetAspect  (1.0);
         testCamera.UpdateCameraGeometry();
 
         // Get the screen centre and U,V vectors and display.

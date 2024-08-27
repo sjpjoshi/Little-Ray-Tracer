@@ -1,8 +1,10 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include "./qbLinAlg/qbVector.h"
 #include "Ray.hpp"
+
+// lin alg
+#include "./qbLinAlg/qbVector.h"
 
 namespace LRT {
 	class Camera {
@@ -28,7 +30,7 @@ namespace LRT {
 		double				GetAspect();
 		//---------------------------------------------------
 
-		Ray GenerateRay(float proScreenX, float proScreenY);
+		bool GenerateRay(float proScreenX, float proScreenY, LRT::Ray &cameraRay);
 		void UpdateCameraGeometry();
 
 	private:

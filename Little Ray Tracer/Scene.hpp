@@ -4,6 +4,8 @@
 #define SCENE_H
 
 #include "Image.hpp"
+#include "Camera.hpp"
+#include "ObjectSphere.hpp"
 
 // std
 #include <vector>
@@ -21,6 +23,8 @@ namespace LRT {
 	
 
 	private:
+		LRT::Camera m_camera;
+		LRT::ObjectSphere testSphere;
 
 
 	};// Scene

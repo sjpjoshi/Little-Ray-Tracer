@@ -3,13 +3,13 @@
 #ifndef RAY_H
 #define RAY_H
 
-// git
+// lin alg
 #include "qbLinAlg/qbVector.h"
 
 namespace LRT {
 	class Ray {
-
 	public:
+		Ray();
 		Ray(const qbVector<double> &point1, const qbVector<double> &point2);
 
 		qbVector<double> getPoint1() const;

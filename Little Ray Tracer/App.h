@@ -3,6 +3,8 @@
 #define APP_H
 
 #include "Image.hpp"
+#include "Scene.hpp"
+#include "Camera.hpp"
 
 // libs
 #include "SDL2/SDL.h"
@@ -18,8 +20,12 @@ public:
     void OnRender();
     void OnExit();
 
+private:
+    void printVector(const qbVector<double>& inputVector);
+
 private:    
     Image m_Image;
+    LRT::Scene m_Scene;
 
     //SDL 2 Variables
     bool isRunning;

@@ -1,4 +1,5 @@
 #include "App.h"
+#include "qbLinAlg/qbVector.h"
 
 App::App() {
     isRunning = true;
@@ -15,17 +16,30 @@ bool App::onInitalize() {
     if (window != NULL) {
         renderer = SDL_CreateRenderer(window, -1, 0);
         m_Image.intialize(1280, 720, renderer);
+        
+        // Test the camera class.
+        LRT::Camera testCamera;
+        testCamera.SetPosition(qbVector<double>(std::vector<double>{0.0, 0.0, 0.0}));
+        testCamera.SetLookAt(qbVector<double>(std::vector<double>{0.0, 2.0, 0.0}));
+        testCamera.SetUp(qbVector<double>(std::vector<double>{0.0, 0.0, 1.0}));
+        testCamera.SetLength(1.0);
+        testCamera.SetHorzSize(1.0);
+        testCamera.SetAspect(1.0);
+        testCamera.UpdateCameraGeometry();
 
-        for (int i = 0; i < 1280; ++i) {
-            for (int j = 0; j < 720; ++j) {
-                double red = (static_cast<double>(i) / 1280.0) * 255.0;
-                double green = (static_cast<double>(j) / 720.0) * 255.0;
-                m_Image.setPixel(i, j, red, green, 0.0);
+        // Get the screen centre and U,V vectors and display.
+        auto screenCentre = testCamera.GetScreenCentre();
+        auto screenU = testCamera.GetU();
+        auto screenV = testCamera.GetV();
 
-            } // for
-
-        } // for
-
+        // And display to the terminal.
+        std::cout << "Camera screen centre:" << std::endl;
+        printVector(screenCentre);
+        std::cout << "\nCamera U vector:" << std::endl;
+        printVector(screenU);
+        std::cout << "\nCamera V vector:" << std::endl;
+        printVector(screenV); 
+        
     } else
         return false;
 
@@ -65,6 +79,9 @@ void App::OnRender() {
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
 
+    // Render the scene
+    m_Scene.Render(m_Image); 
+
     // Display the image
     m_Image.displayImage();
 
@@ -82,3 +99,12 @@ void App::OnExit() {
     SDL_Quit();
 
 } // OnExit
+
+void App::printVector(const qbVector<double>& inputVector) {
+    int nRows = inputVector.GetNumDims();
+    for (int i = 0; i < nRows; ++i) 
+        std::cout << std::fixed << std::setprecision(3) << inputVector.GetElement(i) << std::endl;
+
+   
+
+} // printVector

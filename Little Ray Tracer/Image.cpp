@@ -77,6 +77,9 @@ void Image::displayImage() {
 
 } // displayImage
 
+int Image::getImageX() { return imageX; } // getImageX
+int Image::getImageY() { return imageY; } // get ImageY
+
 void Image::intializeTexture() {
 	Uint32 redMask, greenMask, blueMask, alphaMask;
 

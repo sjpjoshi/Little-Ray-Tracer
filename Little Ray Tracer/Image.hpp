@@ -17,6 +17,9 @@ public:
 	void setPixel(const int ImageX, const int ImageY, const double red, const double green, const double blue);
 	void displayImage();
 
+	int getImageX(); 
+	int getImageY(); 
+
 private:
 	Uint32 convertColor(const double Red, const double Green, const double Blue);
 	void intializeTexture();

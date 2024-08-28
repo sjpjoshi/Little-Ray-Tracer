@@ -16,9 +16,6 @@ namespace LRT {
 			qbVector<double>& localNormal,
 			qbVector<double>& localColor);
 
-	private:
-
-
 	}; // ObjectSphere
 
 } // LRT

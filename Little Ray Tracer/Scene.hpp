@@ -24,7 +24,7 @@ namespace LRT {
 
 	private:
 		LRT::Camera m_camera;
-		LRT::ObjectSphere testSphere;
+		LRT::ObjectSphere m_testSphere;
 
 
 	};// Scene

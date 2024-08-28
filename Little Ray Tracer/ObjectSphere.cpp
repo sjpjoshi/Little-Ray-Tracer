@@ -18,13 +18,33 @@ qbVector<double>& localColor) {
 	// Calculate b
 	double b = 2.0 * qbVector<double>::dot(castRay.m_Point1, vhat);
 	// Calculate c
-	double c = qbVector<double>::dot(castRay.m_Point1, vhat) - 1.0;
+	double c = qbVector<double>::dot(castRay.m_Point1, castRay.m_Point1) - 1.0;
 
 	// Test we have a intersection
 	double interTest = (b * b) - 4.0 * c;
 
-	if (interTest > 0.0)
+	if (interTest > 0.0) {
+		double numSqrt = sqrtf(interTest);
+		double t1 = (-b + numSqrt) / 2.0;
+		double t2 = (-b - numSqrt) / 2.0;
+
+		// if either t1 or t2 is negative, then at least part of the object is behind the camera and we will not render it
+		// it will be discarded
+		if (t1 < 0 || t2 < 0)
+			return false;
+
+		else {
+			// determine which point of intersection was closest to the camera
+			if (t1 < t2) 
+				intersectionPoint = castRay.m_Point1 + (vhat * t1);
+			else 
+				intersectionPoint = castRay.m_Point1 + (vhat * t2);
+
+		 } // else
+
 		return true;
+
+	} // if
 	else
 		return false;
 	

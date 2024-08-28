@@ -27,7 +27,7 @@ private:
     Image m_Image;
     LRT::Scene m_Scene;
 
-    //SDL 2 Variables
+    //SDL2 Variables
     bool isRunning;
     SDL_Window* window;
     SDL_Renderer* renderer;

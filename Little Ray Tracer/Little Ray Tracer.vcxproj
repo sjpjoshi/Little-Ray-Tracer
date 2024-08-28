@@ -130,9 +130,11 @@
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Image.cpp" />
+    <ClCompile Include="LightBase.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ObjectBase.cpp" />
     <ClCompile Include="ObjectSphere.cpp" />
+    <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="Scene.cpp" />
   </ItemGroup>
@@ -140,8 +142,10 @@
     <ClInclude Include="App.h" />
     <ClInclude Include="Camera.hpp" />
     <ClInclude Include="Image.hpp" />
+    <ClInclude Include="LightBase.hpp" />
     <ClInclude Include="ObjectBase.hpp" />
     <ClInclude Include="ObjectSphere.hpp" />
+    <ClInclude Include="PointLight.hpp" />
     <ClInclude Include="qbLinAlg\qbVector.h" />
     <ClInclude Include="Ray.hpp" />
     <ClInclude Include="Scene.hpp" />

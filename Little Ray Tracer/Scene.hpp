@@ -6,9 +6,11 @@
 #include "Image.hpp"
 #include "Camera.hpp"
 #include "ObjectSphere.hpp"
+#include "PointLight.hpp"
 
 // std
 #include <vector>
+#include <memory>
 
 // libs
 #include <SDL2/SDL.h>
@@ -20,13 +22,12 @@ namespace LRT {
 		bool Render(Image& outputImage);
 
 	private:
-	
 
 	private:
 		LRT::Camera m_camera;
-		LRT::ObjectSphere m_testSphere;
-
-
+		std::vector<std::shared_ptr<LRT::ObjectBase>> m_objectList;
+		std::vector<std::shared_ptr<LRT::LightBase>>  m_lightList;
+		
 	};// Scene
 
 } // LRT

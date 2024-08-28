@@ -7,7 +7,8 @@ LRT::ObjectSphere::ObjectSphere() {} // ObjectSphere
 LRT::ObjectSphere::~ObjectSphere() {} // ~ObjectSphere
 
 bool LRT::ObjectSphere::testIntersections(const LRT::Ray& castRay, qbVector<double>& intersectionPoint, qbVector<double>& localNormal, 
-qbVector<double>& localColor) {
+qbVector<double>& localColor) 
+{
 	// Compute the values of a, b, and c
 	qbVector<double> vhat = castRay.m_lineAB;
 	vhat.Normalize();
@@ -30,7 +31,7 @@ qbVector<double>& localColor) {
 
 		// if either t1 or t2 is negative, then at least part of the object is behind the camera and we will not render it
 		// it will be discarded
-		if (t1 < 0 || t2 < 0)
+		if ( (t1 < 0) || (t2 < 0) )
 			return false;
 
 		else {
@@ -39,6 +40,10 @@ qbVector<double>& localColor) {
 				intersectionPoint = castRay.m_Point1 + (vhat * t1);
 			else 
 				intersectionPoint = castRay.m_Point1 + (vhat * t2);
+
+			// compute the local normal
+			localNormal = intersectionPoint;
+			localNormal.Normalize();
 
 		 } // else
 

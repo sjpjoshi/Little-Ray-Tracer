@@ -54,6 +54,9 @@
     <ClCompile Include="GTFM.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectPlane.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -91,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="qbLinAlg\qbMatrix.h">
       <Filter>Header Files\LinAlg</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectPlane.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

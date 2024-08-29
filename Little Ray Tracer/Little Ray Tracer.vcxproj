@@ -134,6 +134,7 @@
     <ClCompile Include="LightBase.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ObjectBase.cpp" />
+    <ClCompile Include="ObjectPlane.cpp" />
     <ClCompile Include="ObjectSphere.cpp" />
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="Ray.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="Image.hpp" />
     <ClInclude Include="LightBase.hpp" />
     <ClInclude Include="ObjectBase.hpp" />
+    <ClInclude Include="ObjectPlane.hpp" />
     <ClInclude Include="ObjectSphere.hpp" />
     <ClInclude Include="PointLight.hpp" />
     <ClInclude Include="qbLinAlg\qbMatrix.h" />

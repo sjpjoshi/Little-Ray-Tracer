@@ -4,6 +4,7 @@
 #define OBJECTSPHERE_H
 
 #include "ObjectBase.hpp"
+#include "GTFM.hpp"
 
 namespace LRT {
 	class ObjectSphere : public ObjectBase {
@@ -14,7 +15,9 @@ namespace LRT {
 			const LRT::Ray& castRay,
 			qbVector<double>& intersectionPoint,
 			qbVector<double>& localNormal,
-			qbVector<double>& localColor);
+			qbVector<double>& localColor) override;
+
+
 
 	}; // ObjectSphere
 

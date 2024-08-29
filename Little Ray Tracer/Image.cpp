@@ -16,9 +16,9 @@ Image::~Image() {
 
 void Image::intialize(const int ImageX, const int ImageY, SDL_Renderer* Renderer) {
 	// Resizing image vecs
-	m_redChannel.resize(ImageX, std::vector<double>(ImageY, 0.0) );
-	m_greenChannel.resize(ImageX, std::vector<double>(ImageY, 0.0));
-	m_blueChannel.resize(ImageX, std::vector<double>(ImageY, 0.0));
+	m_redChannel.resize  (  ImageX, std::vector<double>(ImageY, 0.0));
+	m_greenChannel.resize(  ImageX, std::vector<double>(ImageY, 0.0));
+	m_blueChannel.resize (  ImageX, std::vector<double>(ImageY, 0.0));
 
 	// store image size
 	imageX = ImageX;
@@ -113,12 +113,11 @@ Uint32 Image::convertColor(const double Red, const double Green, const double Bl
 	unsigned char red = static_cast<unsigned char>(Red);
 	unsigned char green = static_cast<unsigned char>(Green);
 	unsigned char blue = static_cast<unsigned char>(Blue);
-
 	#if SDL_BYTEORDER == SDL_BIG_ENDIAN
-		Uint32 pixelColor = (blue << 24) + (green << 16) + (red << 8) + 255;
+		Uint32 pixelColor = (red << 24) + (green << 16) + (blue << 8) + 255;
 
 	#else
-		Uint32 pixelColor = (255 << 24) + (red << 16) + (green << 8) + blue;
+		Uint32 pixelColor = (255 << 24) + (blue << 16) + (green << 8) + red;
 
 	#endif
 

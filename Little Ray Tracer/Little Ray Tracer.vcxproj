@@ -148,6 +148,7 @@
     <ClInclude Include="ObjectBase.hpp" />
     <ClInclude Include="ObjectSphere.hpp" />
     <ClInclude Include="PointLight.hpp" />
+    <ClInclude Include="qbLinAlg\qbMatrix.h" />
     <ClInclude Include="qbLinAlg\qbVector.h" />
     <ClInclude Include="Ray.hpp" />
     <ClInclude Include="Scene.hpp" />

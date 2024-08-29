@@ -27,8 +27,8 @@ namespace LRT {
 		qbMatrix2<double> getForward();
 		qbMatrix2<double> getBackward();
 
-		LRT::Ray Apply(const LRT::Ray & inputRay, bool directionFlag);
-		qbVector<double> Apply(const LRT::Ray& inputRay, bool directionFlag);
+		LRT::Ray Apply(const LRT::Ray& inputRay, bool directionFlag);
+		qbVector<double> Apply(const qbVector<double>& inputVector, bool directionFlag);
 
 		// lhs: left hand side
 		// rhs: right hand side
@@ -37,7 +37,7 @@ namespace LRT {
 
 		// debug function
 		void printMatrix(bool directionFlag);
-		static void printVector(const qbVector<double> &vector);
+		static void printVector(const qbVector<double> &inputVector);
 
 	private:
 		void print(const qbMatrix2<double>& matrix);

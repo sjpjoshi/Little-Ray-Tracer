@@ -89,5 +89,8 @@
     <ClInclude Include="GTFM.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="qbLinAlg\qbMatrix.h">
+      <Filter>Header Files\LinAlg</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -13,7 +13,7 @@ namespace LRT {
 		virtual bool computeIllumination(
 			const qbVector<double>& intersectionPoint,
 			const qbVector<double>& localNormal,
-			const std::vector<std::shared_ptr<LRT::ObjectBase>>& objectBase,
+			const std::vector<std::shared_ptr<LRT::ObjectBase>>& objectList,
 			const std::shared_ptr<LRT::ObjectBase>& currentObject,
 			qbVector<double>& color,
 			double intensity) override;

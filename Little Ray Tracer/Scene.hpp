@@ -7,6 +7,7 @@
 #include "Camera.hpp"
 #include "ObjectSphere.hpp"
 #include "PointLight.hpp"
+#include "ObjectPlane.hpp"
 
 // std
 #include <vector>

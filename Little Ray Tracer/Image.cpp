@@ -38,7 +38,12 @@ void Image::setPixel(const int ImageX, const int ImageY, const double red, const
 
 } // setPixel
 
+// function to generate the display
 void Image::displayImage() {
+
+	// Compute max values
+	computeMaxValues();
+
 	// Allocate memory for a pixel buffer
 	Uint32* tempPixels = new Uint32[imageX * imageY];
 
@@ -109,10 +114,11 @@ void Image::intializeTexture() {
 } // intializeTexture
 
 Uint32 Image::convertColor(const double Red, const double Green, const double Blue) {
-	
-	unsigned char red = static_cast<unsigned char>(Red);
-	unsigned char green = static_cast<unsigned char>(Green);
-	unsigned char blue = static_cast<unsigned char>(Blue);
+	// convert the colors to unsigned ints
+	unsigned char red = static_cast<unsigned char>  ((Red   / m_MaxRed)   * 255.0);
+	unsigned char green = static_cast<unsigned char>((Green / m_MaxGreen) * 255.0);
+	unsigned char blue = static_cast<unsigned char> ((Blue  / m_MaxBlue)  * 255.0);
+
 	#if SDL_BYTEORDER == SDL_BIG_ENDIAN
 		Uint32 pixelColor = (red << 24) + (green << 16) + (blue << 8) + 255;
 
@@ -124,3 +130,38 @@ Uint32 Image::convertColor(const double Red, const double Green, const double Bl
 	return pixelColor;
 
 } // convertColor
+
+// function to convert colors to Uint32
+void Image::computeMaxValues() {
+	m_MaxRed = 0.0;
+	m_MaxGreen = 0.0;
+	m_MaxBlue = 0.0;
+
+	for (int i = 0; i < imageX; ++i) {
+		for (int j = 0; j < imageY; ++j) {
+			double redValue   = m_redChannel.at(i).at(j); 
+			double greenValue = m_greenChannel.at(i).at(j);  
+			double blueValue  = m_blueChannel.at(i).at(j);  
+			if (redValue > m_MaxRed) 
+				m_MaxRed = redValue;
+
+			if (greenValue > m_MaxGreen)
+				m_MaxGreen = greenValue;
+
+			if (blueValue > m_MaxBlue)
+				m_MaxBlue = blueValue; 
+
+			if (m_MaxRed > m_OverallMax)
+				m_OverallMax = m_MaxRed;
+
+			if (m_MaxGreen > m_OverallMax)
+				m_OverallMax = m_MaxGreen;
+
+			if (m_MaxBlue > m_OverallMax)
+				m_OverallMax = m_MaxBlue; 
+
+		} // for (int j = 0; j < imageY; ++j)
+
+	} // for (int i = 0; i < imageX; ++i)
+
+} // computeMaxValues

@@ -21,6 +21,11 @@ namespace LRT {
 	public:
 		Scene();
 		bool Render(Image& outputImage);
+		bool CastRay(LRT::Ray& castRay, 
+			std::shared_ptr<LRT::ObjectBase>& closestObject, 
+			qbVector<double>&closestIntPoint, 
+			qbVector<double>& closestLocalNormal,
+			qbVector<double>& closestLocalColor);
 
 	private:
 

@@ -133,6 +133,7 @@
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="LightBase.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MaterialBase.cpp" />
     <ClCompile Include="ObjectBase.cpp" />
     <ClCompile Include="ObjectPlane.cpp" />
     <ClCompile Include="ObjectSphere.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="GTFM.hpp" />
     <ClInclude Include="Image.hpp" />
     <ClInclude Include="LightBase.hpp" />
+    <ClInclude Include="MaterialBase.hpp" />
     <ClInclude Include="ObjectBase.hpp" />
     <ClInclude Include="ObjectPlane.hpp" />
     <ClInclude Include="ObjectSphere.hpp" />

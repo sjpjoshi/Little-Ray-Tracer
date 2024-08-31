@@ -6,10 +6,17 @@
 #include "Ray.hpp"
 #include "GTFM.hpp"
 
+// std
+#include <memory>
+
 // lin alg
 #include "./qbLinAlg/qbVector.h"
 
 namespace LRT {
+
+	// forward declare our material baseclase, to be overwritten later
+	class MaterialBase;
+
 	class ObjectBase {
 	public:
 		ObjectBase();
@@ -22,10 +29,13 @@ namespace LRT {
 
 		void setTransformMatrix(const LRT::GTForm& tranformMatrix);
 		bool approxEqual(const double float_1, const double float_2);
+		bool assignMaterial(const std::shared_ptr<LRT::MaterialBase>& objectMaterial);
 
 	public:
 		qbVector<double> m_BaseColor{ 3 };
 		LRT::GTForm m_TransformMatrix;
+		std::shared_ptr<LRT::MaterialBase> m_pMaterial;		
+		bool m_HasMaterial = false;
 
 	}; // ObjectBase
 

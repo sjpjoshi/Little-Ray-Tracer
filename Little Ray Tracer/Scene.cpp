@@ -1,12 +1,38 @@
 #include "Scene.hpp"
 #include "MaterialBase.hpp"
+#include "SimpleMaterial.hpp"
 
 LRT::Scene::Scene() {
+
+	// create some materials
+	auto testMaterial = std::make_shared <LRT::SimpleMaterial>(LRT::SimpleMaterial());
+	auto testMaterial2 = std::make_shared <LRT::SimpleMaterial>(LRT::SimpleMaterial());
+	auto testMaterial3 = std::make_shared <LRT::SimpleMaterial>(LRT::SimpleMaterial());
+	auto floorMaterial = std::make_shared <LRT::SimpleMaterial>(LRT::SimpleMaterial());
+
+
+	// Setup the materials
+	testMaterial->m_BaseColor = qbVector<double>{ std::vector<double> {0.25, 0.5, 0.8} };
+	testMaterial->m_Reflectivity = 0.1;
+	testMaterial->m_Shininess = 10.0;
+
+	testMaterial2->m_BaseColor = qbVector<double>{ std::vector<double> {1.0, 0.5, 0.0} };
+	testMaterial2->m_Reflectivity = 0.75;
+	testMaterial2->m_Shininess = 10.0;
+
+	testMaterial3->m_BaseColor = qbVector<double>{ std::vector<double> {1.0, 0.8, 0.0} };
+	testMaterial3->m_Reflectivity = 0.25;
+	testMaterial3->m_Shininess = 10.0;
+
+	floorMaterial->m_BaseColor = qbVector<double>{ std::vector<double> {1.0, 1.0, 1.0} }; 
+	floorMaterial->m_Reflectivity = 0.5; 
+	floorMaterial->m_Shininess = 10.0;
+
+
 	// configure the camera
 	m_camera.SetPosition(qbVector<double>{std::vector<double> {0.0, -10.0, -2.0}});
 	m_camera.SetLookAt(qbVector<double>{std::vector<double> {0.0, 0.0, 0.0}});; 
 	m_camera.SetUp(qbVector<double>{std::vector<double> {0.0, 0.0, 1.0}}); 
-
 
 	m_camera.SetHorzSize(0.25);
 	m_camera.SetAspect(16.0 / 9.0);
@@ -27,7 +53,6 @@ LRT::Scene::Scene() {
 		qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
 		qbVector<double>{std::vector<double>{4.0, 4.0, 1.0}});
 
-	
 	m_objectList.at(3)->setTransformMatrix(planeMatrix); 
 
 	// Modify the spheres 
@@ -44,13 +69,20 @@ LRT::Scene::Scene() {
 		qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}}, 
 		qbVector<double>{std::vector<double>{0.5, 0.5, 0.5}}); 
 
+
 	m_objectList.at(0)->setTransformMatrix(testMatrix1); 
 	m_objectList.at(1)->setTransformMatrix(testMatrix2); 
 	m_objectList.at(2)->setTransformMatrix(testMatrix3); 
 
-	m_objectList.at(0)->m_BaseColor = qbVector<double>{ std::vector<double>{0.25, 0.5, 0.8} };
-	m_objectList.at(1)->m_BaseColor = qbVector<double>{ std::vector<double>{1.0, 0.5, 0.0} };;
-	m_objectList.at(2)->m_BaseColor = qbVector<double>{ std::vector<double> {1.0, 0.8, 0.0} };
+	m_objectList.at(0)->m_BaseColor = qbVector<double>{ std::vector<double> {0.25, 0.5, 0.8} };
+	m_objectList.at(1)->m_BaseColor = qbVector<double>{ std::vector<double> {1.0, 0.5, 0.0}  };
+	m_objectList.at(2)->m_BaseColor = qbVector<double>{ std::vector<double> {1.0, 0.8, 0.0}  };
+
+	// Assign materials to objects
+	m_objectList.at(0)->assignMaterial(testMaterial3);
+	m_objectList.at(1)->assignMaterial(testMaterial2);
+	m_objectList.at(2)->assignMaterial(testMaterial);
+	m_objectList.at(3)->assignMaterial(floorMaterial);
 
 	// Construct a test light.
 	m_lightList.push_back(std::make_shared<LRT::PointLight>(LRT::PointLight()));
@@ -81,8 +113,10 @@ bool LRT::Scene::Render(Image& outputImage) {
 	double yFact = 1.0 / (static_cast<double>(ySize) / 2.0);
 	double minDist = 1e6;
 	double maxDist = 0.0;
-	for (int x = 0; x < xSize; ++x) {
-		for (int y = 0; y < ySize; ++y) {
+	for (int y = 0; y < ySize; ++y) {
+		// display progress
+		std::cout << "procesing line " << y << " of " << ySize << std::endl;
+		for (int x = 0; x < xSize; ++x) {
 			// Normalize the x and y coordinates.
 			double normX = (static_cast<double>(x) * xFact) - 1.0;
 			double normY = (static_cast<double>(y) * yFact) - 1.0;
@@ -103,6 +137,8 @@ bool LRT::Scene::Render(Image& outputImage) {
 				
 				// check if the object has a material
 				if (closestObject->m_HasMaterial) {
+
+					LRT::MaterialBase::m_ReflectionRayCount = 0;
 					// use the material to compute the color
 					qbVector<double> color = closestObject->m_pMaterial->ComputeColor
 						(m_objectList, m_lightList,
@@ -129,9 +165,7 @@ bool LRT::Scene::Render(Image& outputImage) {
 
 	} // for (int x = 0; x < xSize; ++x)
 
-	std::cout << "Minimum distance: " << minDist << std::endl;
-	std::cout << "Maximum distance: " << maxDist << std::endl;
-
+	std::cout << "done!" << std::endl;
 	return true;
 
 } // Render
@@ -142,34 +176,29 @@ bool LRT::Scene::CastRay(LRT::Ray& castRay, std::shared_ptr<LRT::ObjectBase>& cl
 	qbVector<double> localColor{ 3 };
 	double minDist = 1e6;
 	bool intersectionFound = false;
-
-	// Test for intersections with all objects in the scene.
-	for (auto currentObject : m_objectList) {
-		bool validInt = currentObject->testIntersections(castRay, intPoint, localNormal, localColor); 
-
-		// If we have a valid intersection, change pixel color to red.
+	for (auto currentObject : m_objectList)	{
+		bool validInt = currentObject->testIntersections(castRay, intPoint, localNormal, localColor);
+		// If we have a valid intersection.
 		if (validInt) {
-			// set the flag to indicate if we found a intersection
+			// Set the flag to indicate that we found an intersection.
 			intersectionFound = true;
-
-			// compute the distance between the camera and the point of intersection
-			double dist = (closestIntPoint - castRay.m_Point1).norm();
-
-			// if this  object is closer to the camera than any one that we have 
-			// seen before, then store a reference to it
+			// Compute the distance between the camera and the point of intersection.
+			double dist = (intPoint - castRay.m_Point1).norm();
+			/* If this object is closer to the camera than any one that we have
+				seen before, then store a reference to it. */
 			if (dist < minDist) {
 				minDist = dist;
 				closestObject = currentObject;
-				closestIntPoint = intPoint; 
-				closestLocalNormal = localNormal;  
-				closestLocalColor = localColor;  
-				 
-			} // if (dist < minDist)
+				closestIntPoint = intPoint;
+				closestLocalNormal = localNormal;
+				closestLocalColor = localColor;
+
+			} // if  (dist < minDist)
 
 		} // if (validInt)
 
 	} // for (auto currentObject : m_objectList)
-	 
-	return intersectionFound; 
+
+	return intersectionFound;
 
 } // CastRay

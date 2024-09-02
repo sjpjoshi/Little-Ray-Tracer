@@ -50,7 +50,7 @@ void LRT::GTForm::setTransform(const qbVector<double>& translation, const qbVect
 	rotationMatrix_Y.SetElement(2, 0, -sin(rotation.GetElement(1)));
 	rotationMatrix_Y.SetElement(2, 2,  cos(rotation.GetElement(1)));
 
-	rotationMatrix_X.SetElement(1, 0,  cos(rotation.GetElement(0)));
+	rotationMatrix_X.SetElement(1, 1,  cos(rotation.GetElement(0)));
 	rotationMatrix_X.SetElement(1, 2, -sin(rotation.GetElement(0)));
 	rotationMatrix_X.SetElement(2, 1,  sin(rotation.GetElement(0)));
 	rotationMatrix_X.SetElement(2, 2,  cos(rotation.GetElement(0)));

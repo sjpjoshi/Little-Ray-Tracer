@@ -52,12 +52,8 @@ void Image::displayImage() {
 
 	for (int i = 0; i < imageX; ++i) {
 		for (int j = 0; j < imageY; ++j) {
-			tempPixels[(j * imageX) + i] = convertColor( 
-				m_redChannel.at(i).at(j), 
-				m_greenChannel.at(i).at(j), 
-				m_blueChannel.at(i).at(j)
 
-			); // tempPixels
+			tempPixels[ (j * imageX) + i] = convertColor( m_redChannel.at(i).at(j), m_greenChannel.at(i).at(j), m_blueChannel.at(i).at(j)); // tempPixels
 
 		} // for
 
@@ -136,6 +132,7 @@ void Image::computeMaxValues() {
 	m_MaxRed = 0.0;
 	m_MaxGreen = 0.0;
 	m_MaxBlue = 0.0;
+	m_OverallMax = 0.0;
 
 	for (int i = 0; i < imageX; ++i) {
 		for (int j = 0; j < imageY; ++j) {

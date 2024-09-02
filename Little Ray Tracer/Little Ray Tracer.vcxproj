@@ -133,6 +133,8 @@
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Cone.cpp" />
+    <ClCompile Include="Cylinder.cpp" />
     <ClCompile Include="GTFM.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="LightBase.cpp" />
@@ -149,6 +151,8 @@
   <ItemGroup>
     <ClInclude Include="App.h" />
     <ClInclude Include="Camera.hpp" />
+    <ClInclude Include="Cone.hpp" />
+    <ClInclude Include="Cylinder.hpp" />
     <ClInclude Include="GTFM.hpp" />
     <ClInclude Include="Image.hpp" />
     <ClInclude Include="LightBase.hpp" />

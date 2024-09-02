@@ -17,8 +17,6 @@ namespace LRT {
 			const std::shared_ptr<LRT::ObjectBase>& currentObject,
 			qbVector<double>& color,
 			double intensity) override;
-		
-		
 
 	}; // PointLight
 

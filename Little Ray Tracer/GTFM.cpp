@@ -60,7 +60,7 @@ void LRT::GTForm::setTransform(const qbVector<double>& translation, const qbVect
 	scaleMatrix.SetElement(2, 2, scale.GetElement(2)); 
 
 	// combine to give final forward transform
-	m_FWDTFM = translationMatrix * scaleMatrix * rotationMatrix_X * rotationMatrix_Y * rotationMatrix_Z; 
+	m_FWDTFM = translationMatrix * rotationMatrix_X * rotationMatrix_Y * rotationMatrix_Z * scaleMatrix; 
 
 	// Compute the backwards
 	m_BCKTFM = m_FWDTFM;

@@ -12,6 +12,7 @@ bool LRT::PointLight::computeIllumination(const qbVector<double>& intersectionPo
 	
 	// Construct a vector pointing from the intersection point to the light
 	qbVector<double> lightDirection = (m_Location - intersectionPoint).Normalized();
+	double lightDistance = (m_Location - intersectionPoint).norm();
 
 	// compute starting point
 	qbVector<double> startPoint = intersectionPoint; // this currently makes no sense but later it will make sense
@@ -29,8 +30,17 @@ bool LRT::PointLight::computeIllumination(const qbVector<double>& intersectionPo
 	qbVector<double> poiColor{ 3 };
 	bool validIntersection = false;
 	for (auto sceneObject : objectList) {
-		if (sceneObject != currentObject) 
+		if (sceneObject != currentObject) {
 			validIntersection = sceneObject->testIntersections(lightRay, pointOfIntersection, poiNormal, poiColor);
+			if (validIntersection) {
+				double dist = (pointOfIntersection - startPoint).norm();
+
+				if (dist > lightDistance)
+					validIntersection = false;
+
+			} // if (validIntersection)
+
+		} // if (sceneObject != currentObject)
 
 		// if we have a intersection, then no need to check further, we can break the loop
 		// this object is blocking light from this source
@@ -64,6 +74,7 @@ bool LRT::PointLight::computeIllumination(const qbVector<double>& intersectionPo
 		} // else
 
 	} // (!validIntersection)
+
 	else {
 		// Shadow, so no illumination
 		color = m_Color;

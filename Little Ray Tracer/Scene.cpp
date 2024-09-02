@@ -10,7 +10,6 @@ LRT::Scene::Scene() {
 	auto testMaterial3 = std::make_shared <LRT::SimpleMaterial>(LRT::SimpleMaterial());
 	auto floorMaterial = std::make_shared <LRT::SimpleMaterial>(LRT::SimpleMaterial());
 
-
 	// Setup the materials
 	testMaterial->m_BaseColor = qbVector<double>{ std::vector<double> {0.25, 0.5, 0.8} };
 	testMaterial->m_Reflectivity = 0.1;

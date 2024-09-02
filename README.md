@@ -15,16 +15,10 @@ This project is for educational purposes only, this is a learning experience for
 - **Rendering Optimizations**: Uses tile-based rendering and multithreading for improved performance.
 
 ## Examples
-
-### 1. Basic Sphere Rendering
-_Description_: Rendering a simple scene with a sphere and light source.
-
-![Basic Sphere Rendering](path/to/example1.png)
-
-### 2. Refraction and Reflection
+### 1. Refraction and Reflection
 _Description_: Demonstrating light refraction and reflection on a refractive material.
 
-![Refraction Example](path/to/example2.png)
+![Refraction Example](https://github.com/sjpjoshi/Little-Ray-Tracer/blob/main/example1.png)
 
 ### 3. Procedural Texturing
 _Description_: Example of procedural textures generated using value noise and gradient noise.

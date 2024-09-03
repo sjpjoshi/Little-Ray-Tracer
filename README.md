@@ -20,6 +20,11 @@ _Description_: Demonstrating light refraction and reflection on a refractive mat
 
 ![Refraction Example](https://github.com/sjpjoshi/Little-Ray-Tracer/blob/main/example1.png)
 
+### 2. Numerous objects
+_Description_: Cones, Cylinders, Spheres
+
+![Refraction Example](https://github.com/sjpjoshi/Little-Ray-Tracer/blob/main/Example2.png)
+
 ### 3. Procedural Texturing
 _Description_: Example of procedural textures generated using value noise and gradient noise.
 

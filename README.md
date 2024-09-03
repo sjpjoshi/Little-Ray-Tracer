@@ -33,7 +33,7 @@ _Description_: Example of procedural textures generated using value noise and gr
 ### 4. UV Mapping and Image Textures
 _Description_: Example showcasing UV space and image texture mapping on geometric shapes.
 
-![UV Mapping Example](path/to/example4.png)
+![UV Mapping Example](https://github.com/sjpjoshi/Little-Ray-Tracer/blob/main/Example3.png)
 
 ## How to Build
 

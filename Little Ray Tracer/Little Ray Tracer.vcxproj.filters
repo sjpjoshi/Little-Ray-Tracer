@@ -25,12 +25,6 @@
     <Filter Include="Header Files\Lights">
       <UniqueIdentifier>{681caf4a-14ea-4df6-ad6c-c0f8a0ecd3e9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Primitives">
-      <UniqueIdentifier>{dd8c3bc3-9958-49ee-998c-d835e93dc895}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Primitives">
-      <UniqueIdentifier>{67a96ff6-0b8b-4761-a901-c765f910462f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Materials">
       <UniqueIdentifier>{95571de7-3232-4ae5-9660-bdcbb09ed907}</UniqueIdentifier>
     </Filter>
@@ -43,11 +37,23 @@
     <Filter Include="Header Files\Transforms">
       <UniqueIdentifier>{84eac495-b940-477f-927f-62216534d97e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Camera">
+    <Filter Include="Header Files\Viewing">
       <UniqueIdentifier>{5996a61e-940b-498e-90ca-272af8dc5b93}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Camera">
+    <Filter Include="Source Files\Viewing">
       <UniqueIdentifier>{67e27e92-e26e-405b-aa67-1e96c10e2f1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Textures">
+      <UniqueIdentifier>{21611db1-23e0-4736-9042-a752959fa525}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Textures">
+      <UniqueIdentifier>{9c9d4e8e-4f22-4b06-a29b-be9929cfbf20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects">
+      <UniqueIdentifier>{67a96ff6-0b8b-4761-a901-c765f910462f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Objects">
+      <UniqueIdentifier>{dd8c3bc3-9958-49ee-998c-d835e93dc895}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -64,13 +70,13 @@
       <Filter>Source Files\Lights</Filter>
     </ClCompile>
     <ClCompile Include="ObjectSphere.cpp">
-      <Filter>Source Files\Primitives</Filter>
+      <Filter>Source Files\Objects</Filter>
     </ClCompile>
     <ClCompile Include="ObjectBase.cpp">
-      <Filter>Source Files\Primitives</Filter>
+      <Filter>Source Files\Objects</Filter>
     </ClCompile>
     <ClCompile Include="ObjectPlane.cpp">
-      <Filter>Source Files\Primitives</Filter>
+      <Filter>Source Files\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Ray.cpp">
       <Filter>Source Files\Lights</Filter>
@@ -85,19 +91,28 @@
       <Filter>Source Files\Transforms</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>Source Files\Camera</Filter>
+      <Filter>Source Files\Viewing</Filter>
     </ClCompile>
     <ClCompile Include="Image.cpp">
-      <Filter>Source Files\Camera</Filter>
+      <Filter>Source Files\Viewing</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>Source Files\Camera</Filter>
+      <Filter>Source Files\Viewing</Filter>
     </ClCompile>
     <ClCompile Include="Cylinder.cpp">
-      <Filter>Source Files\Primitives</Filter>
+      <Filter>Source Files\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Cone.cpp">
-      <Filter>Source Files\Primitives</Filter>
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Checker.cpp">
+      <Filter>Source Files\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="Flat.cpp">
+      <Filter>Source Files\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureBase.cpp">
+      <Filter>Source Files\Textures</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -117,13 +132,13 @@
       <Filter>Header Files\Lights</Filter>
     </ClInclude>
     <ClInclude Include="ObjectSphere.hpp">
-      <Filter>Header Files\Primitives</Filter>
+      <Filter>Header Files\Objects</Filter>
     </ClInclude>
     <ClInclude Include="ObjectPlane.hpp">
-      <Filter>Header Files\Primitives</Filter>
+      <Filter>Header Files\Objects</Filter>
     </ClInclude>
     <ClInclude Include="ObjectBase.hpp">
-      <Filter>Header Files\Primitives</Filter>
+      <Filter>Header Files\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Ray.hpp">
       <Filter>Header Files\Lights</Filter>
@@ -135,19 +150,28 @@
       <Filter>Header Files\Transforms</Filter>
     </ClInclude>
     <ClInclude Include="Image.hpp">
-      <Filter>Header Files\Camera</Filter>
+      <Filter>Header Files\Viewing</Filter>
     </ClInclude>
     <ClInclude Include="Scene.hpp">
-      <Filter>Header Files\Camera</Filter>
+      <Filter>Header Files\Viewing</Filter>
     </ClInclude>
     <ClInclude Include="Camera.hpp">
-      <Filter>Header Files\Camera</Filter>
+      <Filter>Header Files\Viewing</Filter>
     </ClInclude>
     <ClInclude Include="Cone.hpp">
-      <Filter>Header Files\Primitives</Filter>
+      <Filter>Header Files\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Cylinder.hpp">
-      <Filter>Header Files\Primitives</Filter>
+      <Filter>Header Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Checker.hpp">
+      <Filter>Header Files\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Flat.hpp">
+      <Filter>Header Files\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureBase.hpp">
+      <Filter>Header Files\Textures</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

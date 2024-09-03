@@ -4,6 +4,9 @@
 #include <cmath>
 #include <array>
 
+// libs
+#include <SDL2/SDL_stdinc.h>
+
 LRT::Cylinder::Cylinder()  {} // Cylinder
 LRT::Cylinder::~Cylinder() {} // ~Cylinder 
 
@@ -145,7 +148,18 @@ bool LRT::Cylinder::testIntersections(const Ray& castRay, qbVector<double>& intP
 		// Return the base color.
 		localColor = m_BaseColor;
 
+		// Compute the uv coords and store for later use
+		double x = validPOI.GetElement(0);		
+		double y = validPOI.GetElement(1);
+		double z = validPOI.GetElement(2);
+		double u = atan2(y,x) / M_PI;
+		double v = z;
+
+		m_UVCoords.SetElement(0, u);
+		m_UVCoords.SetElement(1, v); 
+
 		return true;
+
 	} // if (minIndex < 2)
 	else {
 		// Otherwise check the end caps.
@@ -164,6 +178,14 @@ bool LRT::Cylinder::testIntersections(const Ray& castRay, qbVector<double>& intP
 
 				// Return the base color.
 				localColor = m_BaseColor;
+
+				// Compute the uv coords and store for later use
+				double x = validPOI.GetElement(0); 
+				double y = validPOI.GetElement(1); 
+				double z = validPOI.GetElement(2);
+
+				m_UVCoords.SetElement(0, x); 
+				m_UVCoords.SetElement(1, y); 
 
 				return true;
 			}  // if (sqrtf(std::pow(validPOI.GetElement(0), 2.0) + std::pow(validPOI.GetElement(1), 2.0)) < 1.0)

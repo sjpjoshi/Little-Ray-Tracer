@@ -12,7 +12,10 @@ qbVector<double> LRT::SimpleMaterial::ComputeColor(const std::vector<std::shared
 	qbVector<double> spcColor { 3 }; // specular
 
 	// Compute the diffuse component
-	diffColor = computeDiffuseColor(objectList, lightList, currentObject, intPoint, localNormal, m_BaseColor);
+	if (!m_HasTexture)
+		diffColor = computeDiffuseColor(objectList, lightList, currentObject, intPoint, localNormal, m_BaseColor);
+	else 
+		diffColor = computeDiffuseColor(objectList, lightList, currentObject, intPoint, localNormal, m_TextureList.at(0)->getColor(currentObject->m_UVCoords)); 
 
 	// compute the reflection component
 	if (m_Reflectivity > 0.0)

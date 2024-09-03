@@ -3,6 +3,7 @@
 #include "ObjectBase.hpp"
 #include "LightBase.hpp"
 #include "Ray.hpp"
+#include "TextureBase.hpp"
 
 // std
 #include <memory>
@@ -28,7 +29,6 @@ namespace LRT {
 			const qbVector<double>& intPoint, const qbVector<double>& localNormal,
 			const qbVector<double>& baseColor);
 
-		// Function to cast a ray into the scene.
 		bool CastRay(const LRT::Ray& castRay, const std::vector<std::shared_ptr<LRT::ObjectBase>>& objectList,
 			const std::shared_ptr<LRT::ObjectBase>& thisObject,
 			std::shared_ptr<LRT::ObjectBase>& closestObject,
@@ -41,9 +41,14 @@ namespace LRT {
 			const qbVector<double>& intPoint, const qbVector<double>& localNormal,
 			const LRT::Ray& incidentRay);
 
+		void assignTexture(const std::shared_ptr<LRT::Texture::TextureBase>& inputTexture);
+
 	public:
 		inline static int m_MaxReflectionRays;
 		inline static int m_ReflectionRayCount;
+		std::vector<std::shared_ptr<LRT::Texture::TextureBase>> m_TextureList;
+
+		bool m_HasTexture = false;
 
 	private:
 

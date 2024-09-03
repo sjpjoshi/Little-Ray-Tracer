@@ -5,6 +5,8 @@
 #include "Image.hpp"
 #include "Scene.hpp"
 #include "Camera.hpp"
+#include "Flat.hpp"
+#include "Checker.hpp"
 
 // libs
 #include "SDL2/SDL.h"

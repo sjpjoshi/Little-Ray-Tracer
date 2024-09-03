@@ -43,17 +43,22 @@ bool LRT::ObjectPlane::testIntersections(const LRT::Ray& castRay, qbVector<doubl
 
 				// return the base color
 				localColor = m_BaseColor;
+
+				// store the UV coords for possible later use
+				m_UVCoords.SetElement(0, u);
+				m_UVCoords.SetElement(1, v);
+
 				return true;
 
-			} // if
+			} // if (abs(u) < 1.0 && abs(v) < 1.0)
 			else
 				return false;
 
-		} // if
+		} // if (t > 0.0)
 		else
 			return false;
 
-	} // if
+	} // if  (!approxEqual(khat.GetElement(2), 0.0))
 	else
 		return false;
 

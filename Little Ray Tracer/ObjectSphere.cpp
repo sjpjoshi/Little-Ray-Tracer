@@ -3,6 +3,9 @@
 // std
 #include <cmath>
 
+// libs
+#include <SDL2/SDL_stdinc.h>
+
 LRT::ObjectSphere::ObjectSphere() {} // ObjectSphere
 LRT::ObjectSphere::~ObjectSphere() {} // ~ObjectSphere
 
@@ -59,11 +62,26 @@ qbVector<double>& localColor)  {
 			// return the base color
 			localColor = m_BaseColor;
 
+			// Compute and store uv coords for possible later use
+			double x = pointOfIntersection.GetElement(0);
+			double y = pointOfIntersection.GetElement(1);
+			double z = pointOfIntersection.GetElement(2);
+			double u = atan(sqrt(pow(x, 2.0) + pow(y, 2.0)) / z);
+			double v = atan(y / x);
+			if (x < 0.0)
+				v += M_PI;
+
+			u /= M_PI;
+			v /= M_PI;
+
+			m_UVCoords.SetElement(0, u); 
+			m_UVCoords.SetElement(1, v);
+
 		 } // else
 
 		return true;
 
-	} // if
+	} // if (interTest > 0.0)
 	else
 		return false;
 	

@@ -133,8 +133,10 @@
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Checker.cpp" />
     <ClCompile Include="Cone.cpp" />
     <ClCompile Include="Cylinder.cpp" />
+    <ClCompile Include="Flat.cpp" />
     <ClCompile Include="GTFM.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="LightBase.cpp" />
@@ -147,12 +149,15 @@
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SimpleMaterial.cpp" />
+    <ClCompile Include="TextureBase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
     <ClInclude Include="Camera.hpp" />
+    <ClInclude Include="Checker.hpp" />
     <ClInclude Include="Cone.hpp" />
     <ClInclude Include="Cylinder.hpp" />
+    <ClInclude Include="Flat.hpp" />
     <ClInclude Include="GTFM.hpp" />
     <ClInclude Include="Image.hpp" />
     <ClInclude Include="LightBase.hpp" />
@@ -165,6 +170,7 @@
     <ClInclude Include="qbLinAlg\qbVector.h" />
     <ClInclude Include="Ray.hpp" />
     <ClInclude Include="Scene.hpp" />
+    <ClInclude Include="TextureBase.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMaterial.hpp" />

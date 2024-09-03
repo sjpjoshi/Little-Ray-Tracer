@@ -129,3 +129,9 @@ qbVector<double> LRT::MaterialBase::computeReflectionColor(const std::vector<std
 	return reflectionColor;
 
 } // computeReflectionColor
+
+void LRT::MaterialBase::assignTexture(const std::shared_ptr<LRT::Texture::TextureBase>& inputTexture) {
+	m_TextureList.push_back(inputTexture);
+	m_HasTexture = true;
+
+} // assignTexture

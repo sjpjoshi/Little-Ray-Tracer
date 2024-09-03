@@ -20,6 +20,8 @@ namespace LRT {
 		~GTForm();
 		GTForm(const qbMatrix2<double>& forward, const qbMatrix2<double>& back);
 
+		GTForm(const qbVector<double>& translation, const qbVector<double>& rotation, const qbVector<double>& scale);
+
 		void setTransform(const qbVector<double>& translation, 
 						  const qbVector<double>& rotation, 
 						  const qbVector<double>& scale);

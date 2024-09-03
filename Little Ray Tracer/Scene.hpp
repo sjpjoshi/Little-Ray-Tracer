@@ -8,6 +8,8 @@
 #include "ObjectSphere.hpp"
 #include "PointLight.hpp"
 #include "ObjectPlane.hpp"
+#include "Cylinder.hpp"
+#include "Cone.hpp"
 
 // std
 #include <vector>

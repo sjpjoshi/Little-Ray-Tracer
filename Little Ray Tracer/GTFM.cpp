@@ -20,6 +20,8 @@ LRT::GTForm::GTForm(const qbMatrix2<double>& forward, const qbMatrix2<double>& b
 	
 } // GTForm(const qbMatrix2<double>& forward, const qbMatrix2<double>& back)
 
+LRT::GTForm::GTForm(const qbVector<double>& translation, const qbVector<double>& rotation, const qbVector<double>& scale) { setTransform(translation, rotation, scale);} // GTForm
+
 void LRT::GTForm::setTransform(const qbVector<double>& translation, const qbVector<double>& rotation, const qbVector<double>& scale) {
 	// define a matrix for each component of the transform
 	qbMatrix2<double> translationMatrix{ 4, 4 };

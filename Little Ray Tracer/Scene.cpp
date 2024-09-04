@@ -3,11 +3,10 @@
 #include "SimpleMaterial.hpp"
 #include "Checker.hpp"
 #include "TImage.hpp"
+#include "SimpleRefractive.hpp"
 
 LRT::Scene::Scene() {
-	// **************************************************************************************
 	// Configure the camera.
-	// **************************************************************************************	
 	m_camera.SetPosition(qbVector<double>{std::vector<double> {2.0, -5.0, 0.25}});
 	m_camera.SetLookAt(qbVector<double>{std::vector<double> {0.0, 0.0, 0.0}});
 	m_camera.SetUp(qbVector<double>{std::vector<double> {0.0, 0.0, 1.0}});
@@ -15,52 +14,31 @@ LRT::Scene::Scene() {
 	m_camera.SetAspect(16.0 / 9.0);
 	m_camera.UpdateCameraGeometry();
 
-	// **************************************************************************************
 	// Setup ambient lightling.
-	// **************************************************************************************		
-	//LRT::MaterialBase::m_ambientColor = std::vector<double>{ 1.0, 1.0, 1.0 };
-	//LRT::MaterialBase::m_ambientIntensity = 0.2;
+	LRT::MaterialBase::m_AmbientColor = std::vector<double>{ 1.0, 1.0, 1.0 };
+	LRT::MaterialBase::m_AmbientIntensity = 0.2;
 
-	// **************************************************************************************
 	// Create some textures.
-	// **************************************************************************************	
 	auto floorTexture = std::make_shared<LRT::Texture::Checker>(LRT::Texture::Checker());
-	auto imageTexture = std::make_shared<LRT::Texture::TImage>(LRT::Texture::TImage());
 
-	// **************************************************************************************	
 	// Setup the textures.
-	// **************************************************************************************	
 	floorTexture->setTransform(qbVector<double>{std::vector<double>{0.0, 0.0}},
 		0.0,
 		qbVector<double>{std::vector<double>{16.0, 16.0}});
 
-	imageTexture->loadImage("testImage.bmp");
-	imageTexture->setTransform(qbVector<double>{std::vector<double>{0.0, 0.0}},
-		0.0,
-		qbVector<double>{std::vector<double>{1.0, 1.0}});
-
-	// **************************************************************************************
 	// Create some materials.
-	// **************************************************************************************
 	auto floorMaterial = std::make_shared<LRT::SimpleMaterial>(LRT::SimpleMaterial());
 	auto imageMaterial = std::make_shared<LRT::SimpleMaterial>(LRT::SimpleMaterial());
 	auto sphereMaterial = std::make_shared<LRT::SimpleMaterial>(LRT::SimpleMaterial());
 	auto sphereMaterial2 = std::make_shared<LRT::SimpleMaterial>(LRT::SimpleMaterial());
 	auto sphereMaterial3 = std::make_shared<LRT::SimpleMaterial>(LRT::SimpleMaterial());
-	//auto glassMaterial = std::make_shared<LRT::SimpleRefractive>(LRT::SimpleRefractive());
+	auto glassMaterial = std::make_shared<LRT::SimpleRefractive>(LRT::SimpleRefractive());
 
-	// **************************************************************************************	
 	// Setup the materials.
-	// **************************************************************************************
 	floorMaterial->m_BaseColor = qbVector<double>{ std::vector<double>{1.0, 1.0, 1.0} };
 	floorMaterial->m_Reflectivity = 0.25;
 	floorMaterial->m_Shininess = 0.0;
 	floorMaterial->assignTexture(floorTexture);
-
-	imageMaterial->m_BaseColor = qbVector<double>{ std::vector<double>{1.0, 0.125, 0.125} }; 
-	imageMaterial->m_Reflectivity = 0.0;
-	imageMaterial->m_Shininess = 0.0;
-	imageMaterial->assignTexture(imageTexture);
 
 	sphereMaterial->m_BaseColor = qbVector<double>{ std::vector<double>{1.0, 0.2, 0.2} };
 	sphereMaterial->m_Reflectivity = 0.8;
@@ -74,69 +52,51 @@ LRT::Scene::Scene() {
 	sphereMaterial3->m_Reflectivity = 0.8; 
 	sphereMaterial3->m_Shininess = 32.0; 
 
-	/*glassMaterial->m_baseColor = qbVector<double>{ std::vector<double>{0.7, 0.7, 0.2} }; 
+	glassMaterial->m_baseColor = qbVector<double>{ std::vector<double>{0.7, 0.7, 0.2} }; 
 	glassMaterial->m_reflectivity = 0.25; 
 	glassMaterial->m_shininess = 32.0; 
 	glassMaterial->m_translucency = 0.75; 
-	glassMaterial->m_ior = 1.333; */
+	glassMaterial->m_indexOfRefraction = 1.333;  
 
-	// **************************************************************************************	
 	// Create and setup objects.
-	// **************************************************************************************
 	auto floor = std::make_shared<LRT::ObjectPlane>(LRT::ObjectPlane());
 	floor->setTransformMatrix(LRT::GTForm{ qbVector<double>{std::vector<double>{0.0, 0.0, 1.0}},
 																							qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
 																							qbVector<double>{std::vector<double>{16.0, 16.0, 1.0}} });
 	floor->assignMaterial(floorMaterial);
 
-	// **************************************************************************************
-	auto imagePlane = std::make_shared<LRT::ObjectPlane>(LRT::ObjectPlane());
-	imagePlane->setTransformMatrix(LRT::GTForm{ qbVector<double>{std::vector<double>{0.0, 5.0, -0.75}},
-																									qbVector<double>{std::vector<double>{-M_PI / 2.0, 0.0, 0.0}},
-																									qbVector<double>{std::vector<double>{1.75, 1.75, 1.0}} });
-	imagePlane->assignMaterial(imageMaterial);
-
-	// **************************************************************************************	
 	auto sphere = std::make_shared<LRT::ObjectSphere>(LRT::ObjectSphere());
 	sphere->setTransformMatrix(LRT::GTForm{ qbVector<double>{std::vector<double>{-2.0, -2.0, 0.25}},
 																							qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
 																							qbVector<double>{std::vector<double>{0.75, 0.75, 0.75}} });
 	sphere->assignMaterial(sphereMaterial);
 
-	// **************************************************************************************	
 	auto sphere2 = std::make_shared<LRT::ObjectSphere>(LRT::ObjectSphere());
 	sphere2->setTransformMatrix(LRT::GTForm{ qbVector<double>{std::vector<double>{-2.0, -0.5, 0.25}},
 																							qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
 																							qbVector<double>{std::vector<double>{0.75, 0.75, 0.75}} });
 	sphere2->assignMaterial(sphereMaterial2);
 
-	// **************************************************************************************	
 	auto sphere3 = std::make_shared<LRT::ObjectSphere>(LRT::ObjectSphere());
 	sphere3->setTransformMatrix(LRT::GTForm{ qbVector<double>{std::vector<double>{-2.0, -1.25, -1.0}},
 																							qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
 																							qbVector<double>{std::vector<double>{0.75, 0.75, 0.75}} });
 	sphere3->assignMaterial(sphereMaterial3);
 
-	// **************************************************************************************	
-	/*auto sphere4 = std::make_shared<LRT::ObjectSphere>(LRT::ObjectSphere());
+	auto sphere4 = std::make_shared<LRT::ObjectSphere>(LRT::ObjectSphere());
 	sphere4->setTransformMatrix(LRT::GTForm{ qbVector<double>{std::vector<double>{2.0, -1.25, 0.25}},
 																							qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
 																							qbVector<double>{std::vector<double>{0.75, 0.75, 0.75}} });
-	sphere4->assignMaterial(glassMaterial);*/
+	sphere4->assignMaterial(glassMaterial);
 
-	// **************************************************************************************
 	// Put the objects into the scene.	
-	// **************************************************************************************
 	m_objectList.push_back(floor);
-	//m_objectList.push_back(imagePlane);
 	m_objectList.push_back(sphere);
 	m_objectList.push_back(sphere2);
 	m_objectList.push_back(sphere3);
-	//m_objectList.push_back(sphere4);
+	m_objectList.push_back(sphere4);
 
-	// **************************************************************************************	
 	// Construct and setup the lights.
-	// **************************************************************************************	
 	m_lightList.push_back(std::make_shared<LRT::PointLight>(LRT::PointLight()));
 	m_lightList.at(0)->m_Location = qbVector<double>{ std::vector<double> {3.0, -10.0, -5.0} };
 	m_lightList.at(0)->m_Color = qbVector<double>{ std::vector<double> {1.0, 1.0, 1.0} };

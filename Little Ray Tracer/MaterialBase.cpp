@@ -25,28 +25,34 @@ qbVector<double> LRT::MaterialBase::computeDiffuseColor(const std::vector<std::s
 	double blue = 0.0;
 	bool validIllum = false;
 	bool illumFound = false;
-	for (auto currentLight : lightList)
-	{
+	for (auto currentLight : lightList) {
 		validIllum = currentLight->computeIllumination(intPoint, localNormal, objectList, currentObject, color, intensity);
-		if (validIllum)
-		{
+
+		if (validIllum) {
 			illumFound = true;
 			red += color.GetElement(0) * intensity;
 			green += color.GetElement(1) * intensity;
 			blue += color.GetElement(2) * intensity;
-		}
-	}
 
-	if (illumFound)
-	{
+		} // if (validIllum)
+
+	} // for (auto currentLight : lightList)
+
+	if (illumFound) {
 		diffuseColor.SetElement(0, red * baseColor.GetElement(0));
 		diffuseColor.SetElement(1, green * baseColor.GetElement(1));
 		diffuseColor.SetElement(2, blue * baseColor.GetElement(2));
-	}
+
+	} // if (illumFound)
+	else {
+		// The ambient light condition
+		for (int i = 0; i < 3; ++i)
+			diffuseColor.SetElement(i, (m_AmbientColor.GetElement(i) * m_AmbientIntensity) * baseColor.GetElement(1));
+
+	} // else
 
 	// Return the material color.
 	return diffuseColor;
-
 
 } // computeDiffuseColor
 
@@ -83,7 +89,7 @@ bool LRT::MaterialBase::CastRay(const LRT::Ray& castRay, const std::vector<std::
 
 			} // if (validInt)
 
-		} // 	if (currentObject != thisObject)
+		} // if (currentObject != thisObject)
 
 	} // for (auto currentObject : objectList)
 

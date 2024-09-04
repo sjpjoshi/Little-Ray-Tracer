@@ -117,6 +117,9 @@
     <ClCompile Include="TImage.cpp">
       <Filter>Source Files\Textures</Filter>
     </ClCompile>
+    <ClCompile Include="SimpleRefractive.cpp">
+      <Filter>Source Files\Materials</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -178,6 +181,9 @@
     </ClInclude>
     <ClInclude Include="TImage.hpp">
       <Filter>Header Files\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleRefractive.hpp">
+      <Filter>Header Files\Materials</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

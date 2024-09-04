@@ -149,6 +149,7 @@
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SimpleMaterial.cpp" />
+    <ClCompile Include="SimpleRefractive.cpp" />
     <ClCompile Include="TextureBase.cpp" />
     <ClCompile Include="TImage.cpp" />
   </ItemGroup>
@@ -171,6 +172,7 @@
     <ClInclude Include="qbLinAlg\qbVector.h" />
     <ClInclude Include="Ray.hpp" />
     <ClInclude Include="Scene.hpp" />
+    <ClInclude Include="SimpleRefractive.hpp" />
     <ClInclude Include="TextureBase.hpp" />
     <ClInclude Include="TImage.hpp" />
   </ItemGroup>

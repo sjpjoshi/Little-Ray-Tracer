@@ -46,6 +46,8 @@ namespace LRT {
 	public:
 		inline static int m_MaxReflectionRays;
 		inline static int m_ReflectionRayCount;
+		inline static qbVector<double> m_AmbientColor{ std::vector<double> {1.0, 1.0, 1.0} }; 
+		inline static double m_AmbientIntensity = 0.2;
 		std::vector<std::shared_ptr<LRT::Texture::TextureBase>> m_TextureList;
 
 		bool m_HasTexture = false;

@@ -39,15 +39,41 @@ qbVector<double>& localColor)  {
 
 		// if either t1 or t2 is negative, then at least part of the object is behind the camera and we will not render it
 		// it will be discarded
-		if ( (t1 < 0.0) || (t2 < 0.0) )
+		if ( (t1 < 0.0) && (t2 < 0.0) )
 			return false;
 
 		else {
 			// determine which point of intersection was closest to the camera
-			if (t1 < t2) 
-				pointOfIntersection = backRay.m_Point1 + (vhat * t1); 
-			else  
-				pointOfIntersection = backRay.m_Point1 + (vhat * t2); 
+			if (t1 < t2) {
+				if (t1 < 0.0)
+					pointOfIntersection = backRay.m_Point1 + (vhat * t1);
+
+				else {
+
+					if (t2 < 0.0)
+						pointOfIntersection = backRay.m_Point1 + (vhat * t2);
+
+					else
+						return false;
+
+				} // else
+
+			} // if (t1 < t2)
+			else {
+				if (t2 > 0.0)
+					pointOfIntersection = backRay.m_Point1 + (vhat * t2);
+
+				else {
+
+					if (t1 < 0.0)
+						pointOfIntersection = backRay.m_Point1 + (vhat * t1);
+
+					else
+						return false;
+
+				} // else
+
+			} // else
 
 			// pointOfIntersection gives us in the local coordinate system
 			// Transform the intersection back into world Coords

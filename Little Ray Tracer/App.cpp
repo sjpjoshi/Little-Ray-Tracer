@@ -26,30 +26,6 @@ bool App::onInitalize() {
         SDL_RenderClear(renderer); 
         
         m_Scene.Render(m_Image);
-
-        //// Setup a texture
-        //LRT::Texture::Checker testTexture;
-        //testTexture.setTransform(qbVector<double>{std::vector<double>{0.0, 0.0}},
-        //                                          M_PI / 4.0, // Angle
-        //                                          qbVector<double>{std::vector<double>{4.0, 4.0}});
-
-        //for (int y = 0; y < ySize; ++y) {
-        //    for (int x = 0; x < xSize; ++x) {
-        //        // Compute uv
-        //        double u = (static_cast<double>(x) / (static_cast<double>(xSize) / 2.0)) - 1;
-        //        double v = (static_cast<double>(y) / (static_cast<double>(ySize) / 2.0)) - 1;
-        //        qbVector<double> uvCoords{ std::vector<double> {u, v} };
-
-        //        // get the color from the texture
-        //        qbVector<double> pixelCoords = testTexture.getColor(uvCoords); 
-        //         
-        //        // Update this pixels of the image
-        //        m_Image.setPixel(x, y, pixelCoords.GetElement(0), pixelCoords.GetElement(1), pixelCoords.GetElement(2));
-
-        //    } // for
-
-        //} // for
-
         m_Image.displayImage(); 
 
         SDL_RenderPresent(renderer);

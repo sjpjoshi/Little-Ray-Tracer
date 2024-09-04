@@ -2,156 +2,150 @@
 #include "MaterialBase.hpp"
 #include "SimpleMaterial.hpp"
 #include "Checker.hpp"
+#include "TImage.hpp"
 
 LRT::Scene::Scene() {
+	// **************************************************************************************
 	// Configure the camera.
-	//m_camera.SetPosition(	qbVector<double>{std::vector<double> {3.0, -3.75, -3.0}} );
-	m_camera.SetPosition(qbVector<double>{std::vector<double> {2.0, -5.0, -2.0}});
+	// **************************************************************************************	
+	m_camera.SetPosition(qbVector<double>{std::vector<double> {2.0, -5.0, 0.25}});
 	m_camera.SetLookAt(qbVector<double>{std::vector<double> {0.0, 0.0, 0.0}});
 	m_camera.SetUp(qbVector<double>{std::vector<double> {0.0, 0.0, 1.0}});
 	m_camera.SetHorzSize(1.0);
 	m_camera.SetAspect(16.0 / 9.0);
-	//m_camera.SetAspect(1.0);
 	m_camera.UpdateCameraGeometry();
 
-	// Create some textures.
-	auto floorTexture = std::make_shared<LRT::Texture::Checker>(LRT::Texture::Checker());
-	auto sphereTexture = std::make_shared<LRT::Texture::Checker>(LRT::Texture::Checker());
-	auto cylinderTexture = std::make_shared<LRT::Texture::Checker>(LRT::Texture::Checker());
-	auto coneTexture = std::make_shared<LRT::Texture::Checker>(LRT::Texture::Checker());
+	// **************************************************************************************
+	// Setup ambient lightling.
+	// **************************************************************************************		
+	//LRT::MaterialBase::m_ambientColor = std::vector<double>{ 1.0, 1.0, 1.0 };
+	//LRT::MaterialBase::m_ambientIntensity = 0.2;
 
+	// **************************************************************************************
+	// Create some textures.
+	// **************************************************************************************	
+	auto floorTexture = std::make_shared<LRT::Texture::Checker>(LRT::Texture::Checker());
+	auto imageTexture = std::make_shared<LRT::Texture::TImage>(LRT::Texture::TImage());
+
+	// **************************************************************************************	
 	// Setup the textures.
+	// **************************************************************************************	
 	floorTexture->setTransform(qbVector<double>{std::vector<double>{0.0, 0.0}},
 		0.0,
 		qbVector<double>{std::vector<double>{16.0, 16.0}});
 
-	sphereTexture->setColor(qbVector<double>{std::vector<double>{0.2, 0.2, 0.8}}, qbVector<double>{std::vector<double>{0.8, 0.8, 0.2}});
-	sphereTexture->setTransform(qbVector<double>{std::vector<double>{0.0, 0.0}},
+	imageTexture->loadImage("testImage.bmp");
+	imageTexture->setTransform(qbVector<double>{std::vector<double>{0.0, 0.0}},
 		0.0,
-		qbVector<double>{std::vector<double>{16.0, 16.0}});
+		qbVector<double>{std::vector<double>{1.0, 1.0}});
 
-	cylinderTexture->setColor(qbVector<double>{std::vector<double>{1.0, 0.5, 0.0}}, qbVector<double>{std::vector<double>{0.8, 0.8, 0.2}});
-	cylinderTexture->setTransform(qbVector<double>{std::vector<double>{0.0, 0.0}},
-		0.0,
-		qbVector<double>{std::vector<double>{4.0 * M_PI, 4.0}});
-
-	coneTexture->setColor(qbVector<double>{std::vector<double>{0.2, 0.2, 0.8}}, qbVector<double>{std::vector<double>{1.0, 0.5, 0.0}});
-	coneTexture->setTransform(qbVector<double>{std::vector<double>{0.0, 0.0}},
-		0.0,
-		qbVector<double>{std::vector<double>{8.0 * (M_PI / 2.0), 8.0}});
-
+	// **************************************************************************************
 	// Create some materials.
-	auto silverMetal = std::make_shared<LRT::SimpleMaterial>(LRT::SimpleMaterial());
-	auto goldMetal = std::make_shared<LRT::SimpleMaterial>(LRT::SimpleMaterial());
-	auto blueDiffuse = std::make_shared<LRT::SimpleMaterial>(LRT::SimpleMaterial());
-	auto yellowDiffuse = std::make_shared<LRT::SimpleMaterial>(LRT::SimpleMaterial());
-	auto orangeDiffuse = std::make_shared<LRT::SimpleMaterial>(LRT::SimpleMaterial());
+	// **************************************************************************************
 	auto floorMaterial = std::make_shared<LRT::SimpleMaterial>(LRT::SimpleMaterial());
-	auto wallMaterial = std::make_shared<LRT::SimpleMaterial>(LRT::SimpleMaterial());
+	auto imageMaterial = std::make_shared<LRT::SimpleMaterial>(LRT::SimpleMaterial());
+	auto sphereMaterial = std::make_shared<LRT::SimpleMaterial>(LRT::SimpleMaterial());
+	auto sphereMaterial2 = std::make_shared<LRT::SimpleMaterial>(LRT::SimpleMaterial());
+	auto sphereMaterial3 = std::make_shared<LRT::SimpleMaterial>(LRT::SimpleMaterial());
+	//auto glassMaterial = std::make_shared<LRT::SimpleRefractive>(LRT::SimpleRefractive());
 
+	// **************************************************************************************	
 	// Setup the materials.
-	silverMetal->m_BaseColor = qbVector<double>{ std::vector<double>{0.5, 0.5, 0.8} };
-	silverMetal->m_Reflectivity = 0.5;
-	silverMetal->m_Shininess = 20.0;
-
-	goldMetal->m_BaseColor = qbVector<double>{ std::vector<double>{0.8, 0.8, 0.3} };
-	goldMetal->m_Reflectivity = 0.25;
-	goldMetal->m_Shininess = 20.0;
-
-	blueDiffuse->m_BaseColor = qbVector<double>{ std::vector<double>{0.2, 0.2, 0.8} };
-	blueDiffuse->m_Reflectivity = 0.05;
-	blueDiffuse->m_Shininess = 5.0;
-	blueDiffuse->assignTexture(coneTexture);
-
-	yellowDiffuse->m_BaseColor = qbVector<double>{ std::vector<double>{0.8, 0.8, 0.2} };
-	yellowDiffuse->m_Reflectivity = 0.05;
-	yellowDiffuse->m_Shininess = 20.0;
-	yellowDiffuse->assignTexture(sphereTexture);
-
-	orangeDiffuse->m_BaseColor = qbVector<double>{ std::vector<double>{1.0, 0.5, 0.0} };
-	orangeDiffuse->m_Reflectivity = 0.05;
-	orangeDiffuse->m_Shininess = 5.0;
-	orangeDiffuse->assignTexture(cylinderTexture);
-
+	// **************************************************************************************
 	floorMaterial->m_BaseColor = qbVector<double>{ std::vector<double>{1.0, 1.0, 1.0} };
-	floorMaterial->m_Reflectivity = 0.5;
+	floorMaterial->m_Reflectivity = 0.25;
 	floorMaterial->m_Shininess = 0.0;
 	floorMaterial->assignTexture(floorTexture);
 
-	wallMaterial->m_BaseColor = qbVector<double>{ std::vector<double>{1.0, 0.125, 0.125} };
-	wallMaterial->m_Reflectivity = 0.75;
-	wallMaterial->m_Shininess = 0.0;
+	imageMaterial->m_BaseColor = qbVector<double>{ std::vector<double>{1.0, 0.125, 0.125} }; 
+	imageMaterial->m_Reflectivity = 0.0;
+	imageMaterial->m_Shininess = 0.0;
+	imageMaterial->assignTexture(imageTexture);
 
+	sphereMaterial->m_BaseColor = qbVector<double>{ std::vector<double>{1.0, 0.2, 0.2} };
+	sphereMaterial->m_Reflectivity = 0.8;
+	sphereMaterial->m_Shininess = 32.0;
+
+	sphereMaterial2->m_BaseColor = qbVector<double>{ std::vector<double>{0.2, 1.0, 0.2} };
+	sphereMaterial2->m_Reflectivity = 0.8;
+	sphereMaterial2->m_Shininess = 32.0;
+
+	sphereMaterial3->m_BaseColor = qbVector<double>{ std::vector<double>{0.2, 0.2, 1.0} };
+	sphereMaterial3->m_Reflectivity = 0.8; 
+	sphereMaterial3->m_Shininess = 32.0; 
+
+	/*glassMaterial->m_baseColor = qbVector<double>{ std::vector<double>{0.7, 0.7, 0.2} }; 
+	glassMaterial->m_reflectivity = 0.25; 
+	glassMaterial->m_shininess = 32.0; 
+	glassMaterial->m_translucency = 0.75; 
+	glassMaterial->m_ior = 1.333; */
+
+	// **************************************************************************************	
 	// Create and setup objects.
-	auto cone = std::make_shared<LRT::Cone>(LRT::Cone());
-	cone->setTransformMatrix(LRT::GTForm{ qbVector<double>{std::vector<double>{-1.0, -2.0, -2.0}},
-																						qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
-																						qbVector<double>{std::vector<double>{0.5, 0.5, 1.0}} });
-	cone->assignMaterial(blueDiffuse);
-
-	auto leftSphere = std::make_shared<LRT::ObjectSphere>(LRT::ObjectSphere());
-	leftSphere->setTransformMatrix(LRT::GTForm{ qbVector<double>{std::vector<double>{1.0, -1.0, 0.5}},
-																									qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
-																									qbVector<double>{std::vector<double>{0.5, 0.5, 0.5}} });
-	leftSphere->assignMaterial(silverMetal);
-
-	auto rightSphere = std::make_shared<LRT::ObjectSphere>(LRT::ObjectSphere());
-	rightSphere->setTransformMatrix(LRT::GTForm{ qbVector<double>{std::vector<double>{2.0, 0.0, 0.0}},
-																									qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
-																									qbVector<double>{std::vector<double>{1.0, 1.0, 1.0}} });
-	rightSphere->assignMaterial(yellowDiffuse);
-
+	// **************************************************************************************
 	auto floor = std::make_shared<LRT::ObjectPlane>(LRT::ObjectPlane());
 	floor->setTransformMatrix(LRT::GTForm{ qbVector<double>{std::vector<double>{0.0, 0.0, 1.0}},
 																							qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
 																							qbVector<double>{std::vector<double>{16.0, 16.0, 1.0}} });
 	floor->assignMaterial(floorMaterial);
 
-	auto leftWall = std::make_shared<LRT::ObjectPlane>(LRT::ObjectPlane());
-	leftWall->setTransformMatrix(LRT::GTForm{ qbVector<double>{std::vector<double>{-4.0, 0.0, 0.0}},
-																								qbVector<double>{std::vector<double>{0.0, -M_PI / 2.0, -M_PI / 2.0}},
-																								qbVector<double>{std::vector<double>{16.0, 16.0, 1.0}} });
-	leftWall->assignMaterial(wallMaterial);
+	// **************************************************************************************
+	auto imagePlane = std::make_shared<LRT::ObjectPlane>(LRT::ObjectPlane());
+	imagePlane->setTransformMatrix(LRT::GTForm{ qbVector<double>{std::vector<double>{0.0, 5.0, -0.75}},
+																									qbVector<double>{std::vector<double>{-M_PI / 2.0, 0.0, 0.0}},
+																									qbVector<double>{std::vector<double>{1.75, 1.75, 1.0}} });
+	imagePlane->assignMaterial(imageMaterial);
 
-	auto backWall = std::make_shared<LRT::ObjectPlane>(LRT::ObjectPlane());
-	backWall->setTransformMatrix(LRT::GTForm{ qbVector<double>{std::vector<double>{0.0, 4.0, 0.0}},
-																								qbVector<double>{std::vector<double>{-M_PI / 2.0, 0.0, 0.0}},
-																								qbVector<double>{std::vector<double>{16.0, 16.0, 1.0}} });
-	backWall->assignMaterial(wallMaterial);
+	// **************************************************************************************	
+	auto sphere = std::make_shared<LRT::ObjectSphere>(LRT::ObjectSphere());
+	sphere->setTransformMatrix(LRT::GTForm{ qbVector<double>{std::vector<double>{-2.0, -2.0, 0.25}},
+																							qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
+																							qbVector<double>{std::vector<double>{0.75, 0.75, 0.75}} });
+	sphere->assignMaterial(sphereMaterial);
 
-	auto cylinder2 = std::make_shared<LRT::Cylinder>(LRT::Cylinder());
-	cylinder2->setTransformMatrix(LRT::GTForm{ qbVector<double>{std::vector<double>{-1.0, -2.0, 0.0}},
-																									qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
-																									qbVector<double>{std::vector<double>{1.0, 1.0, 1.0}} });
-	cylinder2->assignMaterial(orangeDiffuse);
+	// **************************************************************************************	
+	auto sphere2 = std::make_shared<LRT::ObjectSphere>(LRT::ObjectSphere());
+	sphere2->setTransformMatrix(LRT::GTForm{ qbVector<double>{std::vector<double>{-2.0, -0.5, 0.25}},
+																							qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
+																							qbVector<double>{std::vector<double>{0.75, 0.75, 0.75}} });
+	sphere2->assignMaterial(sphereMaterial2);
 
+	// **************************************************************************************	
+	auto sphere3 = std::make_shared<LRT::ObjectSphere>(LRT::ObjectSphere());
+	sphere3->setTransformMatrix(LRT::GTForm{ qbVector<double>{std::vector<double>{-2.0, -1.25, -1.0}},
+																							qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
+																							qbVector<double>{std::vector<double>{0.75, 0.75, 0.75}} });
+	sphere3->assignMaterial(sphereMaterial3);
+
+	// **************************************************************************************	
+	/*auto sphere4 = std::make_shared<LRT::ObjectSphere>(LRT::ObjectSphere());
+	sphere4->setTransformMatrix(LRT::GTForm{ qbVector<double>{std::vector<double>{2.0, -1.25, 0.25}},
+																							qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
+																							qbVector<double>{std::vector<double>{0.75, 0.75, 0.75}} });
+	sphere4->assignMaterial(glassMaterial);*/
+
+	// **************************************************************************************
 	// Put the objects into the scene.	
-	m_objectList.push_back(cone);
-	m_objectList.push_back(leftSphere);
-	m_objectList.push_back(rightSphere);
+	// **************************************************************************************
 	m_objectList.push_back(floor);
-	m_objectList.push_back(leftWall);
-	m_objectList.push_back(backWall);
-	m_objectList.push_back(cylinder2);
+	//m_objectList.push_back(imagePlane);
+	m_objectList.push_back(sphere);
+	m_objectList.push_back(sphere2);
+	m_objectList.push_back(sphere3);
+	//m_objectList.push_back(sphere4);
 
+	// **************************************************************************************	
 	// Construct and setup the lights.
+	// **************************************************************************************	
 	m_lightList.push_back(std::make_shared<LRT::PointLight>(LRT::PointLight()));
-	m_lightList.at(0)->m_Location = qbVector<double>{ std::vector<double> {3.0, -10.0, -5.0} }; 
+	m_lightList.at(0)->m_Location = qbVector<double>{ std::vector<double> {3.0, -10.0, -5.0} };
 	m_lightList.at(0)->m_Color = qbVector<double>{ std::vector<double> {1.0, 1.0, 1.0} };
+	m_lightList.at(0)->m_Intensity = 4.0;
 
 	m_lightList.push_back(std::make_shared<LRT::PointLight>(LRT::PointLight()));
 	m_lightList.at(1)->m_Location = qbVector<double>{ std::vector<double> {0.0, -10.0, -5.0} };
 	m_lightList.at(1)->m_Color = qbVector<double>{ std::vector<double> {1.0, 1.0, 1.0} };
-
-	m_lightList.push_back(std::make_shared<LRT::PointLight>(LRT::PointLight()));
-	m_lightList.at(2)->m_Location = qbVector<double>{ std::vector<double> {-2.0, 2.0, 0.0} };
-	m_lightList.at(2)->m_Color = qbVector<double>{ std::vector<double> {1.0, 0.8, 0.8} };
-	m_lightList.at(2)->m_Intensity = 0.5;
-
-	m_lightList.push_back(std::make_shared<LRT::PointLight>(LRT::PointLight()));
-	m_lightList.at(3)->m_Location = qbVector<double>{ std::vector<double> {4.0, 2.0, 0.0} };
-	m_lightList.at(3)->m_Color = qbVector<double>{ std::vector<double> {1.0, 0.8, 0.8} };
-	m_lightList.at(3)->m_Intensity = 0.5;
+	m_lightList.at(1)->m_Intensity = 2.0;
 
 } // Scene
 
@@ -171,30 +165,32 @@ bool LRT::Scene::Render(Image& outputImage) {
 	double maxDist = 0.0;
 	for (int y = 0; y < ySize; ++y) {
 		// display progress
-		std::cout << "procesing line " << y << " of " << ySize << std::endl;
+		std::cout << "procesing line " << y << " of " << ySize << ". " << "\r";
+		std::cout.flush();
+
 		for (int x = 0; x < xSize; ++x) {
 			// Normalize the x and y coordinates.
 			double normX = (static_cast<double>(x) * xFact) - 1.0;
 			double normY = (static_cast<double>(y) * yFact) - 1.0;
 
 			// Generate the ray for this pixel.
-			m_camera.GenerateRay(normX, normY, cameraRay);
+			m_camera.GenerateRay(normX, normY, cameraRay); 
 
 			// test for intersections with all objects in the scene
-			std::shared_ptr<LRT::ObjectBase> closestObject;
-			qbVector<double> closestIntPoint{ 3 };
-			qbVector<double> closestLocalNormal{ 3 };
-			qbVector<double> closestLocalColor{ 3 };
+			std::shared_ptr<LRT::ObjectBase> closestObject; 
+			qbVector<double> closestIntPoint{ 3 }; 
+			qbVector<double> closestLocalNormal{ 3 }; 
+			qbVector<double> closestLocalColor{ 3 }; 
 
-			bool intersectionFound = CastRay(cameraRay, closestObject, closestIntPoint, closestLocalNormal, closestLocalColor);
+			bool intersectionFound = CastRay(cameraRay, closestObject, closestIntPoint, closestLocalNormal, closestLocalColor); 
 
 			// compute the illumination for the closest object, assuming that there was a valid intersection 
 			if (intersectionFound) {
 				
 				// check if the object has a material
-				if (closestObject->m_HasMaterial) {
+				if (closestObject->m_HasMaterial) { 
 
-					LRT::MaterialBase::m_ReflectionRayCount = 0;
+					LRT::MaterialBase::m_ReflectionRayCount = 0; 
 					// use the material to compute the color
 					qbVector<double> color = closestObject->m_pMaterial->ComputeColor
 						(m_objectList, m_lightList,
@@ -221,6 +217,7 @@ bool LRT::Scene::Render(Image& outputImage) {
 
 	} // for (int x = 0; x < xSize; ++x)
 
+	std::cout << std::endl;
 	std::cout << "done!" << std::endl;
 	return true;
 

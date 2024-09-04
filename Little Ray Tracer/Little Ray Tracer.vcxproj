@@ -150,6 +150,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SimpleMaterial.cpp" />
     <ClCompile Include="TextureBase.cpp" />
+    <ClCompile Include="TImage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
@@ -171,6 +172,7 @@
     <ClInclude Include="Ray.hpp" />
     <ClInclude Include="Scene.hpp" />
     <ClInclude Include="TextureBase.hpp" />
+    <ClInclude Include="TImage.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMaterial.hpp" />

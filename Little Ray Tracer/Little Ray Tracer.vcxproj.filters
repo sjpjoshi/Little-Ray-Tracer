@@ -114,6 +114,9 @@
     <ClCompile Include="TextureBase.cpp">
       <Filter>Source Files\Textures</Filter>
     </ClCompile>
+    <ClCompile Include="TImage.cpp">
+      <Filter>Source Files\Textures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -171,6 +174,9 @@
       <Filter>Header Files\Textures</Filter>
     </ClInclude>
     <ClInclude Include="TextureBase.hpp">
+      <Filter>Header Files\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="TImage.hpp">
       <Filter>Header Files\Textures</Filter>
     </ClInclude>
   </ItemGroup>

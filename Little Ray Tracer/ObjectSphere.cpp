@@ -66,11 +66,9 @@ qbVector<double>& localColor)  {
 			double x = pointOfIntersection.GetElement(0);
 			double y = pointOfIntersection.GetElement(1);
 			double z = pointOfIntersection.GetElement(2);
-			double u = atan(sqrt(pow(x, 2.0) + pow(y, 2.0)) / z);
-			double v = atan(y / x);
-			if (x < 0.0)
-				v += M_PI;
-
+			double u = atan2(sqrt(pow(x, 2.0) + pow(y, 2.0)), z);
+			double v = atan2(y , x);
+			
 			u /= M_PI;
 			v /= M_PI;
 

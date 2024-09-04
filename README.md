@@ -25,12 +25,7 @@ _Description_: Cones, Cylinders, Spheres
 
 ![Refraction Example](https://github.com/sjpjoshi/Little-Ray-Tracer/blob/main/Example2.png)
 
-### 3. Procedural Texturing
-_Description_: Example of procedural textures generated using value noise and gradient noise.
-
-![Procedural Texturing](path/to/example3.png)
-
-### 4. UV Mapping and Image Textures
+### 3. UV Mapping and Image Textures
 _Description_: Example showcasing UV space and image texture mapping on geometric shapes.
 
 ![UV Mapping Example](https://github.com/sjpjoshi/Little-Ray-Tracer/blob/main/Example3.png)

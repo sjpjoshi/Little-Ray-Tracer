@@ -19,6 +19,7 @@ This project is for educational purposes only, this is a learning experience for
 _Description_: Demonstrating light refraction and reflection on a refractive material.
 
 ![Refraction Example](https://github.com/sjpjoshi/Little-Ray-Tracer/blob/main/example1.png)
+![Reflection Example](https://github.com/sjpjoshi/Little-Ray-Tracer/blob/main/Example4.png)
 
 ### 2. Numerous objects
 _Description_: Cones, Cylinders, Spheres

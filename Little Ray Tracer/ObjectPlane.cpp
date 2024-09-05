@@ -34,11 +34,10 @@ bool LRT::ObjectPlane::testIntersections(const LRT::Ray& castRay, qbVector<doubl
 				qbVector<double> pointOfIntersection = backRay.m_Point1 + t * khat;
 				// Transform the intersection point back into the world coord
 				intersectionPoint = m_TransformMatrix.Apply(pointOfIntersection, LRT::FWDTFORM);
+
 				// Compute the local normal
-				qbVector<double> localOrigin{ std::vector<double>{ 0.0, 0.0, 0.0  } };
-				qbVector<double> normalVector{ std::vector<double>{ 0.0, 0.0, -1.0 } };
-				qbVector<double> globalOrigin = m_TransformMatrix.Apply(localOrigin, LRT::FWDTFORM);
-				localNormal = m_TransformMatrix.Apply(normalVector, LRT::FWDTFORM) - globalOrigin;
+				qbVector<double> normalVector{ std::vector<double> {0.0, 0.0, -1.0} };
+				localNormal = m_TransformMatrix.ApplyNormal(normalVector); 
 				localNormal.Normalize();
 
 				// return the base color

@@ -80,9 +80,8 @@ qbVector<double>& localColor)  {
 			intersectionPoint = m_TransformMatrix.Apply(pointOfIntersection, LRT::FWDTFORM);
 
 			// compute the local normal
-			qbVector<double> objectOrigin = qbVector<double>(std::vector<double>{0.0, 0.0, 0.0});
-			qbVector<double> newObjectOrigin = m_TransformMatrix.Apply(objectOrigin, LRT::FWDTFORM);
-			localNormal = intersectionPoint - newObjectOrigin; 
+			qbVector<double> normalVector = pointOfIntersection; 
+			localNormal = m_TransformMatrix.ApplyNormal(normalVector); 
 			localNormal.Normalize();
 
 			// return the base color

@@ -121,15 +121,17 @@ bool LRT::Cone::testIntersections(const Ray& castRay, qbVector<double>& intPoint
 		qbVector<double> newNormal{ 3 };
 		qbVector<double> localOrigin{ std::vector<double> {0.0, 0.0, 0.0} };
 		qbVector<double> globalOrigin = m_TransformMatrix.Apply(localOrigin, LRT::FWDTFORM);
+
 		double tX = validPOI.GetElement(0);
 		double tY = validPOI.GetElement(1);
 		double tZ = -sqrtf(pow(tX, 2.0) + pow(tY, 2.0));
+
 		orgNormal.SetElement(0, tX);
 		orgNormal.SetElement(1, tY);
 		orgNormal.SetElement(2, tZ);
-		newNormal = m_TransformMatrix.Apply(orgNormal, LRT::FWDTFORM) - globalOrigin;
-		newNormal.Normalize();
-		localNormal = newNormal;
+		
+		localNormal = m_TransformMatrix.ApplyNormal(orgNormal);
+		localNormal.Normalize();
 
 		// Return the base color.
 		localColor = m_BaseColor;
@@ -157,8 +159,7 @@ bool LRT::Cone::testIntersections(const Ray& castRay, qbVector<double>& intPoint
 				// Compute the local normal.
 				qbVector<double> localOrigin{ std::vector<double> {0.0, 0.0, 0.0} };
 				qbVector<double> normalVector{ std::vector<double> {0.0, 0.0, 1.0} };
-				qbVector<double> globalOrigin = m_TransformMatrix.Apply(localOrigin, LRT::FWDTFORM);
-				localNormal = m_TransformMatrix.Apply(normalVector, LRT::FWDTFORM) - globalOrigin;
+				localNormal = m_TransformMatrix.ApplyNormal(normalVector);
 				localNormal.Normalize();
 
 				// Return the base color.

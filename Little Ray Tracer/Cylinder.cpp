@@ -134,16 +134,15 @@ bool LRT::Cylinder::testIntersections(const Ray& castRay, qbVector<double>& intP
 		intPoint = m_TransformMatrix.Apply(validPOI, LRT::FWDTFORM);
 
 		// Compute the local normal.
-		qbVector<double> orgNormal{ 3 };
-		qbVector<double> newNormal{ 3 };
-		qbVector<double> localOrigin{ std::vector<double> {0.0, 0.0, 0.0} };
-		qbVector<double> globalOrigin = m_TransformMatrix.Apply(localOrigin, LRT::FWDTFORM);
-		orgNormal.SetElement(0, validPOI.GetElement(0));
-		orgNormal.SetElement(1, validPOI.GetElement(1));
-		orgNormal.SetElement(2, 0.0);
-		newNormal = m_TransformMatrix.Apply(orgNormal, LRT::FWDTFORM) - globalOrigin;
-		newNormal.Normalize();
-		localNormal = newNormal;
+		qbVector<double> orgNormal{ 3 }; 
+		qbVector<double> newNormal{ 3 }; 
+		qbVector<double> localOrigin{ std::vector<double> {0.0, 0.0, 0.0} }; 
+		qbVector<double> globalOrigin = m_TransformMatrix.Apply(localOrigin, LRT::FWDTFORM); 
+		orgNormal.SetElement(0, validPOI.GetElement(0)); 
+		orgNormal.SetElement(1, validPOI.GetElement(1)); 
+		orgNormal.SetElement(2, 0.0); 
+		localNormal = m_TransformMatrix.ApplyNormal(orgNormal);
+		localNormal.Normalize();
 
 		// Return the base color.
 		localColor = m_BaseColor;
@@ -165,15 +164,15 @@ bool LRT::Cylinder::testIntersections(const Ray& castRay, qbVector<double>& intP
 		// Otherwise check the end caps.
 		if (!approxEqual(v.GetElement(2), 0.0)) {
 			// Check if we are inside the disk.
+
 			if (sqrtf(std::pow(validPOI.GetElement(0), 2.0) + std::pow(validPOI.GetElement(1), 2.0)) < 1.0) {
+				
 				// Transform the intersection point back into world coordinates.
 				intPoint = m_TransformMatrix.Apply(validPOI, LRT::FWDTFORM);
 
 				// Compute the local normal.
-				qbVector<double> localOrigin{ std::vector<double> {0.0, 0.0, 0.0} };
 				qbVector<double> normalVector{ std::vector<double> {0.0, 0.0, 0.0 + validPOI.GetElement(2)} };
-				qbVector<double> globalOrigin = m_TransformMatrix.Apply(localOrigin, LRT::FWDTFORM);
-				localNormal = m_TransformMatrix.Apply(normalVector, LRT::FWDTFORM) - globalOrigin;
+				localNormal = m_TransformMatrix.ApplyNormal(normalVector);
 				localNormal.Normalize();
 
 				// Return the base color.

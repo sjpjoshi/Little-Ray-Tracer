@@ -11,7 +11,7 @@
 
 namespace LRT {
 	// direction flag values
-	constexpr bool FWDTFORM = true; // foward transform
+	constexpr bool FWDTFORM = true;  // forward transform
 	constexpr bool BCKTFORM = false; // back transform
 
 	class GTForm {
@@ -31,6 +31,8 @@ namespace LRT {
 
 		LRT::Ray Apply(const LRT::Ray& inputRay, bool directionFlag);
 		qbVector<double> Apply(const qbVector<double>& inputVector, bool directionFlag);
+		qbVector<double> ApplyNormal(const qbVector<double>& inputVector);
+		qbMatrix2<double> getNormalTransform();
 
 		// lhs: left hand side
 		// rhs: right hand side
@@ -43,10 +45,12 @@ namespace LRT {
 
 	private:
 		void print(const qbMatrix2<double>& matrix);
+		void extractLinearTransform();
 
 	private:
 		qbMatrix2<double> m_FWDTFM{ 4,4 }; // forward transform
 		qbMatrix2<double> m_BCKTFM{ 4,4 }; // forward transform
+		qbMatrix2<double> m_LINTFM{ 3,3 }; // linear transform
 
 	}; // GTFM
 

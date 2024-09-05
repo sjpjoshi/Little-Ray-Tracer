@@ -5,10 +5,15 @@
 LRT::GTForm::GTForm() {
 	m_FWDTFM.SetToIdentity();
 	m_BCKTFM.SetToIdentity();
+	extractLinearTransform();
 
 } // GTForm
 
-LRT::GTForm::~GTForm() {} // ~GTForm
+LRT::GTForm::GTForm(const qbVector<double>& translation, const qbVector<double>& rotation, const qbVector<double>& scale) {
+	setTransform(translation, rotation, scale);
+	extractLinearTransform();
+
+} // GTForm
 
 LRT::GTForm::GTForm(const qbMatrix2<double>& forward, const qbMatrix2<double>& back) {
 	if (forward.GetNumRows() != 4 || forward.GetNumCols() != 4
@@ -17,10 +22,11 @@ LRT::GTForm::GTForm(const qbMatrix2<double>& forward, const qbMatrix2<double>& b
 
 	m_FWDTFM = forward;
 	m_BCKTFM = back;
+	extractLinearTransform(); 
 	
 } // GTForm(const qbMatrix2<double>& forward, const qbMatrix2<double>& back)
 
-LRT::GTForm::GTForm(const qbVector<double>& translation, const qbVector<double>& rotation, const qbVector<double>& scale) { setTransform(translation, rotation, scale);} // GTForm
+LRT::GTForm::~GTForm() {} // ~GTForm
 
 void LRT::GTForm::setTransform(const qbVector<double>& translation, const qbVector<double>& rotation, const qbVector<double>& scale) {
 	// define a matrix for each component of the transform
@@ -129,6 +135,17 @@ qbVector<double> LRT::GTForm::Apply(const qbVector<double>& inputVector, bool di
 
 } // qbVector<double> LRT::GTForm::Apply
 
+qbVector<double> LRT::GTForm::ApplyNormal(const qbVector<double>& inputVector) {
+	qbVector<double> result =  m_LINTFM * inputVector; 
+	return result;
+
+} // ApplyNormal
+
+qbMatrix2<double> LRT::GTForm::getNormalTransform() {
+	return m_LINTFM;
+
+} // getNormalTransform
+
 namespace LRT {
 
 	LRT::GTForm operator*(const LRT::GTForm& lhs, const LRT::GTForm& rhs) {
@@ -178,6 +195,22 @@ void LRT::GTForm::print(const qbMatrix2<double>& matrix) {
 	} // for
 
 } // print
+
+void LRT::GTForm::extractLinearTransform() {
+	// copy the linear portion of the transforms
+	for (int i = 0; i < 3; ++i) {
+		for (int j = 0; j < 3; ++j) {
+			m_LINTFM.SetElement(i, j, m_FWDTFM.GetElement(i, j));
+
+		} // for
+
+	} // for
+
+	// Inverse and tranpose
+	m_LINTFM.Inverse();
+	m_LINTFM = m_LINTFM.Transpose();
+
+} // extractLinearTransform
 
 void LRT::GTForm::printVector(const qbVector<double>& inputVector) {
 	int nRows = inputVector.GetNumDims();

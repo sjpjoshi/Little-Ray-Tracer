@@ -120,6 +120,9 @@
     <ClCompile Include="SimpleRefractive.cpp">
       <Filter>Source Files\Materials</Filter>
     </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -184,6 +187,9 @@
     </ClInclude>
     <ClInclude Include="SimpleRefractive.hpp">
       <Filter>Header Files\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -37,6 +37,7 @@ namespace LRT {
 		std::shared_ptr<LRT::MaterialBase> m_pMaterial;		
 		bool m_HasMaterial = false;
 		qbVector<double> m_UVCoords{ 2 };
+		bool m_isVisible = true;
 
 	}; // ObjectBase
 

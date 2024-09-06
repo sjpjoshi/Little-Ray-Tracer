@@ -5,6 +5,9 @@ LRT::ObjectPlane::ObjectPlane() {} // ObjectPlane
 LRT::ObjectPlane::~ObjectPlane() {} // ~ObjectPlane
 
 bool LRT::ObjectPlane::testIntersections(const LRT::Ray& castRay, qbVector<double>& intersectionPoint, qbVector<double>& localNormal, qbVector<double>& localColor) {
+	if (!m_isVisible)
+		return false;
+
 	// Copy the ray and apply the backwards transform 
 	LRT::Ray backRay = m_TransformMatrix.Apply(castRay, LRT::BCKTFORM);
 

@@ -11,6 +11,9 @@ LRT::Cylinder::Cylinder()  {} // Cylinder
 LRT::Cylinder::~Cylinder() {} // ~Cylinder 
 
 bool LRT::Cylinder::testIntersections(const Ray& castRay, qbVector<double>& intPoint, qbVector<double>& localNormal, qbVector<double>& localColor) {
+	if (!m_isVisible)
+		return false;
+	
 	// Copy the ray and apply the backwards transform.
 	LRT::Ray bckRay = m_TransformMatrix.Apply(castRay, LRT::BCKTFORM);
 

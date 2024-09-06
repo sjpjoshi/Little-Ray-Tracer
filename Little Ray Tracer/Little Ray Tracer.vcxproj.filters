@@ -189,7 +189,7 @@
       <Filter>Header Files\Materials</Filter>
     </ClInclude>
     <ClInclude Include="Box.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

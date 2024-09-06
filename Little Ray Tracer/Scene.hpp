@@ -10,6 +10,12 @@
 #include "ObjectPlane.hpp"
 #include "Cylinder.hpp"
 #include "Cone.hpp"
+#include "MaterialBase.hpp"
+#include "SimpleMaterial.hpp"
+#include "Checker.hpp"
+#include "TImage.hpp"
+#include "SimpleRefractive.hpp"
+#include "Box.hpp"
 
 // std
 #include <vector>

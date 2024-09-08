@@ -2,8 +2,8 @@
 
 LRT::Scene::Scene() {
 	// Configure the camera.
-	m_camera.SetPosition(qbVector<double>{std::vector<double> {2.0, -5.0, 0.25}});
-	m_camera.SetLookAt(qbVector<double>{std::vector<double> {0.0, 0.0, 0.0}});
+	m_camera.SetPosition(qbVector<double>{std::vector<double> {6.0, -10.0, -4.0}});
+	m_camera.SetLookAt(qbVector<double>{std::vector<double> {0.0, 0.0, 0.5}});
 	m_camera.SetUp(qbVector<double>{std::vector<double> {0.0, 0.0, 1.0}});
 	m_camera.SetHorzSize(1.0);
 	m_camera.SetAspect(16.0 / 9.0);
@@ -15,34 +15,26 @@ LRT::Scene::Scene() {
 
 	// Create some textures.
 	auto floorTexture = std::make_shared<LRT::Texture::Checker>(LRT::Texture::Checker());
-	auto boxTexture = std::make_shared<LRT::Texture::Checker>(LRT::Texture::Checker()); 
-
 
 	// Setup the textures.
 	floorTexture->setTransform(qbVector<double>{std::vector<double>{0.0, 0.0}},
 							   0.0,
 		                       qbVector<double>{std::vector<double>{16.0, 16.0}});
 
-	boxTexture->setTransform(qbVector<double>{std::vector<double>{0.0, 0.0}},
-							 0.0,
-							 qbVector<double>{std::vector<double>{16.0, 16.0}});
-
-
 	// Create some materials.
 	auto floorMaterial= std::make_shared<LRT::SimpleMaterial>(LRT::SimpleMaterial());
-	auto boxMat = std::make_shared<LRT::SimpleMaterial>(LRT::SimpleMaterial()); 
-	
+	auto sampleMatrial = std::make_shared<LRT::SimpleMaterial>(LRT::SimpleMaterial());
+
 	// Setup the materials.
 	floorMaterial->m_BaseColor = qbVector<double>{ std::vector<double>{1.0, 1.0, 1.0} };
 	floorMaterial->m_Reflectivity = 0.25;
 	floorMaterial->m_Shininess = 0.0;
 	floorMaterial->assignTexture(floorTexture);
 
-	boxMat->m_BaseColor = std::vector<double>{ 1.0, 1.0, 0.0 };
-	boxMat->m_Reflectivity = 0.0;
-	boxMat->m_Shininess = 32.0;
-	boxMat->assignTexture(boxTexture);
-	
+	sampleMatrial->m_BaseColor = qbVector<double>{ std::vector<double>{1.0, 0.2, 0.2} }; 
+	sampleMatrial->m_Reflectivity = 0.8; 
+	sampleMatrial->m_Shininess = 32.0;  
+
 	// Create and setup objects.
 	auto floor = std::make_shared<LRT::ObjectPlane>(LRT::ObjectPlane());
 	floor->m_isVisible = true;
@@ -51,16 +43,18 @@ LRT::Scene::Scene() {
 										   qbVector<double>{std::vector<double>{16.0, 16.0, 1.0}} });
 	floor->assignMaterial(floorMaterial);
 
-	auto box = std::make_shared<LRT::Box>(LRT::Box());
-	box->m_isVisible = true;
-	box->setTransformMatrix(LRT::GTForm{ qbVector<double>{std::vector<double>{-1.0, -2.0, 0.0}},
-										 qbVector<double>{std::vector<double>{0.0, 0.0, -M_PI / 6.0}}, 
-										 qbVector<double>{std::vector<double>{0.5, 0.5, 0.5}} }); 
-	box->assignMaterial(boxMat);
+	auto torus = std::make_shared<LRT::RM::Torus>(LRT::RM::Torus());
+	torus->m_isVisible = true;
+	torus->setRadii(0.7, 0.3);
+	torus->setTransformMatrix(LRT::GTForm{ qbVector<double>{std::vector<double>{0.0, 0.0, 0.2}},
+										   qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
+										   qbVector<double>{std::vector<double>{1.0, 1.0, 1.0}} });
+	torus->assignMaterial(sampleMatrial); 
+	
 
 	// Put the objects into the scene.	
 	m_objectList.push_back(floor);
-	m_objectList.push_back(box);
+	m_objectList.push_back(torus);
 
 	// Construct and setup the lights.
 	m_lightList.push_back(std::make_shared<LRT::PointLight>(LRT::PointLight()));

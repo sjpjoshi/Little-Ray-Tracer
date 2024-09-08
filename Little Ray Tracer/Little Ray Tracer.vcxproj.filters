@@ -55,6 +55,12 @@
     <Filter Include="Header Files\Objects">
       <UniqueIdentifier>{dd8c3bc3-9958-49ee-998c-d835e93dc895}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Ray Marching">
+      <UniqueIdentifier>{757388af-c215-44a2-ae5e-d4a20547b763}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Ray March">
+      <UniqueIdentifier>{0fc7a3d7-1aa6-407b-a275-a9b893381f6e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -123,6 +129,27 @@
     <ClCompile Include="Box.cpp">
       <Filter>Source Files\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Cube.hpp">
+      <Filter>Header Files\Ray Marching</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.hpp">
+      <Filter>Header Files\Ray Marching</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>Source Files\Ray March</Filter>
+    </ClCompile>
+    <ClCompile Include="RayMarchBase.cpp">
+      <Filter>Source Files\Ray March</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Source Files\Ray March</Filter>
+    </ClCompile>
+    <ClCompile Include="Torus.cpp">
+      <Filter>Source Files\Ray March</Filter>
+    </ClCompile>
+    <ClCompile Include="SDF.cpp">
+      <Filter>Source Files\Ray March</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -190,6 +217,15 @@
     </ClInclude>
     <ClInclude Include="Box.hpp">
       <Filter>Header Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="RayMarchBase.hpp">
+      <Filter>Header Files\Ray Marching</Filter>
+    </ClInclude>
+    <ClInclude Include="Torus.hpp">
+      <Filter>Header Files\Ray Marching</Filter>
+    </ClInclude>
+    <ClInclude Include="SDF.hpp">
+      <Filter>Header Files\Ray Marching</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

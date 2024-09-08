@@ -136,6 +136,8 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Checker.cpp" />
     <ClCompile Include="Cone.cpp" />
+    <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="Cube.hpp" />
     <ClCompile Include="Cylinder.cpp" />
     <ClCompile Include="Flat.cpp" />
     <ClCompile Include="GTFM.cpp" />
@@ -148,11 +150,16 @@
     <ClCompile Include="ObjectSphere.cpp" />
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="Ray.cpp" />
+    <ClCompile Include="RayMarchBase.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SDF.cpp" />
     <ClCompile Include="SimpleMaterial.cpp" />
     <ClCompile Include="SimpleRefractive.cpp" />
+    <ClCompile Include="Sphere.cpp" />
+    <ClCompile Include="Sphere.hpp" />
     <ClCompile Include="TextureBase.cpp" />
     <ClCompile Include="TImage.cpp" />
+    <ClCompile Include="Torus.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
@@ -173,10 +180,13 @@
     <ClInclude Include="qbLinAlg\qbMatrix.h" />
     <ClInclude Include="qbLinAlg\qbVector.h" />
     <ClInclude Include="Ray.hpp" />
+    <ClInclude Include="RayMarchBase.hpp" />
     <ClInclude Include="Scene.hpp" />
+    <ClInclude Include="SDF.hpp" />
     <ClInclude Include="SimpleRefractive.hpp" />
     <ClInclude Include="TextureBase.hpp" />
     <ClInclude Include="TImage.hpp" />
+    <ClInclude Include="Torus.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMaterial.hpp" />

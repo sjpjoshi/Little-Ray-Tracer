@@ -16,6 +16,8 @@
 #include "TImage.hpp"
 #include "SimpleRefractive.hpp"
 #include "Box.hpp"
+#include "Sphere.hpp"
+#include "Torus.hpp"
 
 // std
 #include <vector>

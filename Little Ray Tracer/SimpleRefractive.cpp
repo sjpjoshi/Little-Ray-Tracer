@@ -16,11 +16,14 @@ qbVector<double> LRT::SimpleRefractive::ComputeColor(const std::vector<std::shar
 	qbVector<double> trnColor { 3 }; // transluncent color
 
 	// Compute the diffuse component
-	if (!m_HasTexture)
+	if (!m_HasTexture) {
+		std::cout << "hi if (!m_HasTexture) ComputeColor" << std::endl;
 		diffColor = computeDiffuseColor(objectList, lightList, currentObject, intPoint, localNormal, m_baseColor);
-	else
+	}
+	else {
+		std::cout << "hi else ComputeColor" << std::endl;
 		diffColor = computeDiffuseColor(objectList, lightList, currentObject, intPoint, localNormal, m_TextureList.at(0)->getColor(currentObject->m_UVCoords));
-
+	}
 	// compute the reflection component
 	if (m_reflectivity > 0.0) 
 		refColor = computeReflectionColor(objectList, lightList, currentObject, intPoint, localNormal, cameraRay);
@@ -178,9 +181,10 @@ qbVector<double> LRT::SimpleRefractive::computeTransluency(const std::vector<std
 		// check if a material has been assigned
 		if (closestObject->m_HasMaterial)
 			matColor = closestObject->m_pMaterial->ComputeColor(objectList, lightList, closestObject, closestIntPoint, closestLocalNormal, finalRay);
-		else
+		else {
+			std::cout << "hi if (intersectionFound) computeTransluency " << std::endl;
 			matColor = LRT::MaterialBase::computeDiffuseColor(objectList, lightList, closestObject, closestIntPoint, closestLocalNormal, closestObject->m_BaseColor);
-
+		}
 	} // if (intersectionFound)
 	else {
 		// leave matColor as it is

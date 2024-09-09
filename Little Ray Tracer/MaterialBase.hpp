@@ -43,11 +43,17 @@ namespace LRT {
 
 		void assignTexture(const std::shared_ptr<LRT::Texture::TextureBase>& inputTexture);
 
+		qbVector<double> getTextureColor(const qbVector<double>& uvCoords);
+
+		void blendColor(qbVector<double>& color1, const qbVector<double>& color2);
+
 	public:
 		inline static int m_MaxReflectionRays;
 		inline static int m_ReflectionRayCount;
+
 		inline static qbVector<double> m_AmbientColor{ std::vector<double> {1.0, 1.0, 1.0} }; 
 		inline static double m_AmbientIntensity = 0.2;
+
 		std::vector<std::shared_ptr<LRT::Texture::TextureBase>> m_TextureList;
 
 		bool m_HasTexture = false;

@@ -18,6 +18,7 @@
 #include "Box.hpp"
 #include "Sphere.hpp"
 #include "Torus.hpp"
+#include "Gradient.hpp"
 
 // std
 #include <vector>

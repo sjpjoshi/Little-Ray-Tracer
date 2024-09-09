@@ -150,6 +150,12 @@
     <ClCompile Include="SDF.cpp">
       <Filter>Source Files\Ray March</Filter>
     </ClCompile>
+    <ClCompile Include="ColorMap.cpp">
+      <Filter>Source Files\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="Gradient.cpp">
+      <Filter>Source Files\Textures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -226,6 +232,12 @@
     </ClInclude>
     <ClInclude Include="SDF.hpp">
       <Filter>Header Files\Ray Marching</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorMap.hpp">
+      <Filter>Header Files\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Gradient.hpp">
+      <Filter>Header Files\Textures</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

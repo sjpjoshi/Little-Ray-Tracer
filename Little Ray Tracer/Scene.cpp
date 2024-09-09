@@ -2,8 +2,8 @@
 
 LRT::Scene::Scene() {
 	// Configure the camera.
-	m_camera.SetPosition(qbVector<double>{std::vector<double> {6.0, -10.0, -4.0}});
-	m_camera.SetLookAt(qbVector<double>{std::vector<double> {0.0, 0.0, 0.5}});
+	m_camera.SetPosition(qbVector<double>{std::vector<double> {4.0, -8.0, -2.0}});
+	m_camera.SetLookAt(qbVector<double>{std::vector<double> {-0.5, 0.0, 0.0}});
 	m_camera.SetUp(qbVector<double>{std::vector<double> {0.0, 0.0, 1.0}});
 	m_camera.SetHorzSize(1.0);
 	m_camera.SetAspect(16.0 / 9.0);
@@ -14,48 +14,35 @@ LRT::Scene::Scene() {
 	LRT::MaterialBase::m_AmbientIntensity = 0.2;
 
 	// Create some textures.
-	auto floorTexture = std::make_shared<LRT::Texture::Checker>(LRT::Texture::Checker());
+	auto gradientTexture = std::make_shared<LRT::Texture::Gradient>(LRT::Texture::Gradient());
 
 	// Setup the textures.
-	floorTexture->setTransform(qbVector<double>{std::vector<double>{0.0, 0.0}},
-							   0.0,
-		                       qbVector<double>{std::vector<double>{16.0, 16.0}});
+	gradientTexture->setTransform(qbVector<double>{std::vector<double>{0.0, 0.0}}, 
+								  0.0, 
+								  qbVector<double>{std::vector<double>{1.0, 1.0}});   
+	gradientTexture->setStop(0.0, qbVector<double>{std::vector<double>{1.0, 0.0, 0.0, 1.0}}); 
+	gradientTexture->setStop(0.5, qbVector<double>{std::vector<double>{0.0, 1.0, 0.0, 1.0}});  
+	gradientTexture->setStop(1.0, qbVector<double>{std::vector<double>{0.0, 0.0, 1.0, 1.0}}); 
 
 	// Create some materials.
-	auto floorMaterial= std::make_shared<LRT::SimpleMaterial>(LRT::SimpleMaterial());
-	auto sampleMatrial = std::make_shared<LRT::SimpleMaterial>(LRT::SimpleMaterial());
+	auto floorMaterial= std::make_shared<LRT::SimpleMaterial>(LRT::SimpleMaterial());  
 
 	// Setup the materials.
-	floorMaterial->m_BaseColor = qbVector<double>{ std::vector<double>{1.0, 1.0, 1.0} };
-	floorMaterial->m_Reflectivity = 0.25;
-	floorMaterial->m_Shininess = 0.0;
-	floorMaterial->assignTexture(floorTexture);
-
-	sampleMatrial->m_BaseColor = qbVector<double>{ std::vector<double>{1.0, 0.2, 0.2} }; 
-	sampleMatrial->m_Reflectivity = 0.8; 
-	sampleMatrial->m_Shininess = 32.0;  
+	floorMaterial->m_BaseColor = std::vector<double>{10.0, 10.0, 10.0}; 
+	floorMaterial->m_Reflectivity = 0.2; 
+	floorMaterial->m_Shininess = 0.8; 
+	floorMaterial->assignTexture(gradientTexture); 
 
 	// Create and setup objects.
 	auto floor = std::make_shared<LRT::ObjectPlane>(LRT::ObjectPlane());
 	floor->m_isVisible = true;
-	floor->setTransformMatrix(LRT::GTForm{ qbVector<double>{std::vector<double>{0.0, 0.0, 1.0}},
+	floor->setTransformMatrix(LRT::GTForm{ qbVector<double>{std::vector<double>{0.0, 0.0, 2.0}},
 										   qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
 										   qbVector<double>{std::vector<double>{16.0, 16.0, 1.0}} });
-	floor->assignMaterial(floorMaterial);
+	floor->assignMaterial(floorMaterial); 
 
-	auto torus = std::make_shared<LRT::RM::Torus>(LRT::RM::Torus());
-	torus->m_isVisible = true;
-	torus->setRadii(0.7, 0.3);
-	torus->setTransformMatrix(LRT::GTForm{ qbVector<double>{std::vector<double>{0.0, 0.0, 0.2}},
-										   qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
-										   qbVector<double>{std::vector<double>{1.0, 1.0, 1.0}} });
-	torus->assignMaterial(sampleMatrial); 
-	
-
-	// Put the objects into the scene.	
 	m_objectList.push_back(floor);
-	m_objectList.push_back(torus);
-
+	
 	// Construct and setup the lights.
 	m_lightList.push_back(std::make_shared<LRT::PointLight>(LRT::PointLight()));
 	m_lightList.at(0)->m_Location = qbVector<double>{ std::vector<double> {3.0, -10.0, -5.0} };
@@ -98,9 +85,9 @@ bool LRT::Scene::Render(Image& outputImage) {
 
 			// test for intersections with all objects in the scene
 			std::shared_ptr<LRT::ObjectBase> closestObject; 
-			qbVector<double> closestIntPoint{ 3 }; 
+			qbVector<double> closestIntPoint   { 3 }; 
 			qbVector<double> closestLocalNormal{ 3 }; 
-			qbVector<double> closestLocalColor{ 3 }; 
+			qbVector<double> closestLocalColor { 3 }; 
 
 			bool intersectionFound = CastRay(cameraRay, closestObject, closestIntPoint, closestLocalNormal, closestLocalColor); 
 
@@ -114,14 +101,15 @@ bool LRT::Scene::Render(Image& outputImage) {
 					// use the material to compute the color
 					qbVector<double> color = closestObject->m_pMaterial->ComputeColor
 						(m_objectList, m_lightList,
-						closestObject, closestIntPoint,
-						closestLocalNormal, cameraRay);
+						closestObject, closestIntPoint, 
+						closestLocalNormal, cameraRay); 
 
 					outputImage.setPixel(x, y, color.GetElement(0), color.GetElement(1), color.GetElement(2));
 
 				} // if (closestObject->m_HasMaterial)
 				else {
 					// use the basic method to compute the color
+					std::cout << "hi if (closestObject->m_HasMaterial) Render" << std::endl;
 					qbVector<double> matColor = LRT::MaterialBase::computeDiffuseColor
 					(m_objectList, m_lightList, closestObject, 
 					 closestIntPoint, closestLocalNormal,  

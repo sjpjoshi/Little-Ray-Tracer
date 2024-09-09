@@ -135,11 +135,13 @@
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Checker.cpp" />
+    <ClCompile Include="ColorMap.cpp" />
     <ClCompile Include="Cone.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Cube.hpp" />
     <ClCompile Include="Cylinder.cpp" />
     <ClCompile Include="Flat.cpp" />
+    <ClCompile Include="Gradient.cpp" />
     <ClCompile Include="GTFM.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="LightBase.cpp" />
@@ -166,9 +168,11 @@
     <ClInclude Include="Box.hpp" />
     <ClInclude Include="Camera.hpp" />
     <ClInclude Include="Checker.hpp" />
+    <ClInclude Include="ColorMap.hpp" />
     <ClInclude Include="Cone.hpp" />
     <ClInclude Include="Cylinder.hpp" />
     <ClInclude Include="Flat.hpp" />
+    <ClInclude Include="Gradient.hpp" />
     <ClInclude Include="GTFM.hpp" />
     <ClInclude Include="Image.hpp" />
     <ClInclude Include="LightBase.hpp" />

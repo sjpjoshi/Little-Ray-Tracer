@@ -12,11 +12,14 @@ qbVector<double> LRT::SimpleMaterial::ComputeColor(const std::vector<std::shared
 	qbVector<double> spcColor { 3 }; // specular
 
 	// Compute the diffuse component
-	if (!m_HasTexture)
+	if (!m_HasTexture) {
+		std::cout << "hi if (!m_HasTexture) ComputeColor" << std::endl;  
 		diffColor = computeDiffuseColor(objectList, lightList, currentObject, intPoint, localNormal, m_BaseColor);
-	else 
-		diffColor = computeDiffuseColor(objectList, lightList, currentObject, intPoint, localNormal, m_TextureList.at(0)->getColor(currentObject->m_UVCoords)); 
-
+	}
+	else {
+		std::cout << "hi else ComputeColor" << std::endl;  
+		diffColor = computeDiffuseColor(objectList, lightList, currentObject, intPoint, localNormal, getTextureColor(currentObject->m_UVCoords)); 
+	}
 	// compute the reflection component
 	if (m_Reflectivity > 0.0)
 		refColor = computeReflectionColor(objectList, lightList, currentObject, intPoint, localNormal, cameraRay);
@@ -48,14 +51,14 @@ qbVector<double> LRT::SimpleMaterial::computeSpecular(const std::vector<std::sha
 		qbVector<double> startPoint = intPoint + (lightDirection * 0.001);
 		//Construct a ray from the point of intersection to the light
 		LRT::Ray lightRay(startPoint, startPoint + lightDirection);
-		// Loop through all of the objects in the scene to check if any
-		// obstruct light from this source
-
+	
 		qbVector<double> poi{ 3 }; // point of instersection
 		qbVector<double> poiNormal{ 3 }; // point of instersection
 		qbVector<double> poiColor{ 3 }; // point of instersection
 		bool validInt = false; // valid intersection
 
+		// Loop through all of the objects in the scene to check if any
+		// obstruct light from this source
 		for (auto sceneObject : objectList) {
 			validInt = sceneObject->testIntersections(lightRay, poi, poiNormal, poiColor);
 			if(validInt)

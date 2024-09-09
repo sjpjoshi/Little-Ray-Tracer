@@ -11,10 +11,11 @@ namespace LRT {
 
 			virtual qbVector<double> getColor(const qbVector<double>& uvCoords) override;
 			void setColor(const qbVector<double>& inputColor1, const qbVector<double>& inputColor2);
+			void setColor(const std::shared_ptr<LRT::Texture::TextureBase>& inputColor1, const std::shared_ptr<LRT::Texture::TextureBase>& inputColor2);
 
 		private:
-			qbVector<double> m_Color1{4};
-			qbVector<double> m_Color2{4}; 
+			std::shared_ptr<LRT::Texture::TextureBase> m_pColor1;
+			std::shared_ptr<LRT::Texture::TextureBase> m_pColor2;
 
 		}; // Checker
 

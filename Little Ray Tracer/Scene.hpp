@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef SCENE_H
-#define SCENE_H
-
 #include "Image.hpp"
 #include "Camera.hpp"
 #include "ObjectSphere.hpp"
@@ -49,5 +46,3 @@ namespace LRT {
 	};// Scene
 
 } // LRT
-
-#endif

@@ -15,11 +15,9 @@ qbVector<double> LRT::Texture::ColorMap::getColor(double position){
 	int firstStop = 0; 
 	int secondStop = 0; 
 	double diff = 2.0;
-	for (int i = 0; i < numStops; ++i) 
-	{
+	for (int i = 0; i < numStops; ++i)  {
 		double t = m_StopPosition.at(i) - position; 
-		if (fabs(t) < diff) 
-		{
+		if (fabs(t) < diff) {
 			diff = fabs(t); 
 			firstStop = i; 
 			if (t < 0.0)
@@ -28,8 +26,10 @@ qbVector<double> LRT::Texture::ColorMap::getColor(double position){
 				secondStop = std::max((i - 1), 0); 
 			else 
 				secondStop = i; 
-		}
-	}
+
+		} // if
+
+	} // for
 
 	// If the position was exactly at a stop, we simply return that value.
 	if (firstStop == secondStop) 

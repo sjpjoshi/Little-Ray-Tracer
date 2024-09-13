@@ -177,6 +177,12 @@
     <ClCompile Include="BasicNoise.cpp">
       <Filter>Source Files\Textures</Filter>
     </ClCompile>
+    <ClCompile Include="GradidentNoiseGenerator.cpp">
+      <Filter>Source Files\Noise</Filter>
+    </ClCompile>
+    <ClCompile Include="Marble.cpp">
+      <Filter>Source Files\Textures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -267,6 +273,12 @@
       <Filter>Header Files\Textures</Filter>
     </ClInclude>
     <ClInclude Include="BasicValueNoise.hpp">
+      <Filter>Header Files\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="GradidentNoiseGenerator.hpp">
+      <Filter>Header Files\Noise</Filter>
+    </ClInclude>
+    <ClInclude Include="Marble.hpp">
       <Filter>Header Files\Textures</Filter>
     </ClInclude>
   </ItemGroup>

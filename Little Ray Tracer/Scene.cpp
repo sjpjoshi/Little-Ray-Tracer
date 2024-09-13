@@ -14,15 +14,8 @@ LRT::Scene::Scene() {
 	LRT::MaterialBase::m_AmbientIntensity = 0.2;
 
 	// Create some textures.
-	auto gradientTexture = std::make_shared<LRT::Texture::Gradient>(LRT::Texture::Gradient());
 
 	// Setup the textures.
-	gradientTexture->setTransform(qbVector<double>{std::vector<double>{0.0, 0.0}}, 
-								  0.0, 
-								  qbVector<double>{std::vector<double>{1.0, 1.0}});   
-	gradientTexture->setStop(0.0, qbVector<double>{std::vector<double>{1.0, 0.0, 0.0, 1.0}}); 
-	gradientTexture->setStop(0.5, qbVector<double>{std::vector<double>{0.0, 1.0, 0.0, 1.0}});  
-	gradientTexture->setStop(1.0, qbVector<double>{std::vector<double>{0.0, 0.0, 1.0, 1.0}}); 
 
 	// Create some materials.
 	auto floorMaterial= std::make_shared<LRT::SimpleMaterial>(LRT::SimpleMaterial());  
@@ -31,7 +24,7 @@ LRT::Scene::Scene() {
 	floorMaterial->m_BaseColor = std::vector<double>{10.0, 10.0, 10.0}; 
 	floorMaterial->m_Reflectivity = 0.2; 
 	floorMaterial->m_Shininess = 0.8; 
-	floorMaterial->assignTexture(gradientTexture); 
+	//floorMaterial->assignTexture();
 
 	// Create and setup objects.
 	auto floor = std::make_shared<LRT::ObjectPlane>(LRT::ObjectPlane());

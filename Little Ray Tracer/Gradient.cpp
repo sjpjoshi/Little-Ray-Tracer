@@ -7,7 +7,8 @@ qbVector<double> LRT::Texture::Gradient::getColor(const qbVector<double>& uvCoor
 	// Apply the local transform to the uv coords
 	qbVector<double> inputLocation = uvCoords;
 	qbVector<double> newLocation = applyTransform(inputLocation);
-	double newU = std::min( (newLocation.GetElement(1) + 1.0) / 2.0, 1.0 );
+	double newU = std::min((inputLocation.GetElement(1) + 1.0) / 2.0, 1.0); 
+
 	return m_ColorMap.getColor(newU);
 
 } // getColor

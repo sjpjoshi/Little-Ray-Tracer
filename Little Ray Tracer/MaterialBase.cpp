@@ -17,7 +17,7 @@ qbVector<double> LRT::MaterialBase::ComputeColor(const std::vector<std::shared_p
 
 qbVector<double> LRT::MaterialBase::computeDiffuseColor(const std::vector<std::shared_ptr<LRT::ObjectBase>>& objectList, const std::vector<std::shared_ptr<LRT::LightBase>>& lightList, const std::shared_ptr<LRT::ObjectBase>& currentObject, const qbVector<double>& intPoint, const qbVector<double>& localNormal, const qbVector<double>& baseColor) {
 	// Compute the color due to diffuse illumination.
-	qbVector<double> diffuseColor;
+	qbVector<double> diffuseColor{3}; 
 	double intensity = 100;
 	qbVector<double> color{ 3 };
 	double red = 0.0;

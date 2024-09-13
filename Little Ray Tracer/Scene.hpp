@@ -19,6 +19,7 @@
 #include "Sphere.hpp"
 #include "Torus.hpp"
 #include "Gradient.hpp"
+#include "BasicValueNoise.hpp" 
 
 // std
 #include <vector>

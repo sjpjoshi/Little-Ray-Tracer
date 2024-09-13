@@ -10,44 +10,41 @@ void LRT::Texture::ColorMap::setStop(double position, const qbVector<double>& va
 } // setStop
 
 qbVector<double> LRT::Texture::ColorMap::getColor(double position){
-	// find the closest stops to the current position
-	int nStops = m_StopPosition.size();
-	int firstStop  = 0;
-	int secondStop = 0;
-	double diff    = 2.0;
-	
-	for (int i = 0; i < nStops; ++i) {
-		double t = m_StopPosition.at(i) - position;
-		if (fabs(t) < diff) {
-			diff = fabs(t);
-			firstStop = i;
+	// Find the closest stops to the current position.
+	int numStops = m_StopPosition.size(); 
+	int firstStop = 0; 
+	int secondStop = 0; 
+	double diff = 2.0;
+	for (int i = 0; i < numStops; ++i) 
+	{
+		double t = m_StopPosition.at(i) - position; 
+		if (fabs(t) < diff) 
+		{
+			diff = fabs(t); 
+			firstStop = i; 
 			if (t < 0.0)
-				secondStop = std::min(nStops, (i + 1));
-
+				secondStop = std::min(numStops, (i + 1)); 
 			else if (t > 0.0)
 				secondStop = std::max((i - 1), 0); 
+			else 
+				secondStop = i; 
+		}
+	}
 
-			else
-				secondStop = i;
+	// If the position was exactly at a stop, we simply return that value.
+	if (firstStop == secondStop) 
+		return m_StopValues.at(firstStop); 
 
-		} // if
+	// Otherwise we need to interpolate between the first and second stops.
+	// Make sure the stops are in the right order.
+	if (secondStop < firstStop) 
+		std::swap(firstStop, secondStop); 
 
-	} // for
-
-	// if the position was exactly at a stop, we simply return that value
-	if (firstStop == secondStop)
-		return m_StopValues.at(firstStop);
-
-	// Otherwise we need to interpolate between the first and second stop
-	// make sure the stops are in the right order
-	if (secondStop < firstStop)
-		std::swap(firstStop, secondStop);
-
-	// perform linear interpolation of the values between the two stops
-	// equation: yi + * ( (x - xi ) * ( (yf - yi ) / (xf - xi) ) ) )
-	double x = position;
-	double xi = m_StopPosition.at(firstStop);
-	double xf = m_StopPosition.at(secondStop);
-	return  m_StopPosition.at(firstStop) + (x - xi) * ((m_StopPosition.at(secondStop) - m_StopPosition.at(firstStop)) * (1.0 / (xf - xi)));
+	// Perform linear interpolation of the values between the two stops.
+	// y0 + ((x - x0)*((y1 - y0)/(x1 - x0)))
+	double x = position; 
+	double x0 = m_StopPosition.at(firstStop); 
+	double x1 = m_StopPosition.at(secondStop); 
+	return m_StopValues.at(firstStop) + (x - x0) * ((m_StopValues.at(secondStop) - m_StopValues.at(firstStop)) * (1.0 / (x1 - x0))); 
 
 } // getColor

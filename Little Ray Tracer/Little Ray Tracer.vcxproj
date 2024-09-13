@@ -132,6 +132,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="BasicNoise.cpp" />
+    <ClCompile Include="BasicValueNoise.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Checker.cpp" />
@@ -147,6 +149,7 @@
     <ClCompile Include="LightBase.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MaterialBase.cpp" />
+    <ClCompile Include="NoiseBase.cpp" />
     <ClCompile Include="ObjectBase.cpp" />
     <ClCompile Include="ObjectPlane.cpp" />
     <ClCompile Include="ObjectSphere.cpp" />
@@ -162,9 +165,13 @@
     <ClCompile Include="TextureBase.cpp" />
     <ClCompile Include="TImage.cpp" />
     <ClCompile Include="Torus.cpp" />
+    <ClCompile Include="ValueNoiseGenerator.cpp" />
+    <ClCompile Include="ValueNoiseGenerator.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
+    <ClInclude Include="BasicNoise.hpp" />
+    <ClInclude Include="BasicValueNoise.hpp" />
     <ClInclude Include="Box.hpp" />
     <ClInclude Include="Camera.hpp" />
     <ClInclude Include="Checker.hpp" />
@@ -177,6 +184,7 @@
     <ClInclude Include="Image.hpp" />
     <ClInclude Include="LightBase.hpp" />
     <ClInclude Include="MaterialBase.hpp" />
+    <ClInclude Include="NoiseBase.hpp" />
     <ClInclude Include="ObjectBase.hpp" />
     <ClInclude Include="ObjectPlane.hpp" />
     <ClInclude Include="ObjectSphere.hpp" />

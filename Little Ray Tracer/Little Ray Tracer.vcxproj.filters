@@ -61,6 +61,12 @@
     <Filter Include="Source Files\Ray March">
       <UniqueIdentifier>{0fc7a3d7-1aa6-407b-a275-a9b893381f6e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Noise">
+      <UniqueIdentifier>{9a40bd95-f357-4f75-aed0-5546ed5f3d8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Noise">
+      <UniqueIdentifier>{dc6acd03-6c80-4a64-aaaa-1002f26fa8e2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -156,6 +162,21 @@
     <ClCompile Include="Gradient.cpp">
       <Filter>Source Files\Textures</Filter>
     </ClCompile>
+    <ClCompile Include="ValueNoiseGenerator.hpp">
+      <Filter>Header Files\Noise</Filter>
+    </ClCompile>
+    <ClCompile Include="NoiseBase.cpp">
+      <Filter>Source Files\Noise</Filter>
+    </ClCompile>
+    <ClCompile Include="ValueNoiseGenerator.cpp">
+      <Filter>Source Files\Noise</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicValueNoise.cpp">
+      <Filter>Source Files\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicNoise.cpp">
+      <Filter>Source Files\Textures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -237,6 +258,15 @@
       <Filter>Header Files\Textures</Filter>
     </ClInclude>
     <ClInclude Include="Gradient.hpp">
+      <Filter>Header Files\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="NoiseBase.hpp">
+      <Filter>Header Files\Noise</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicNoise.hpp">
+      <Filter>Header Files\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicValueNoise.hpp">
       <Filter>Header Files\Textures</Filter>
     </ClInclude>
   </ItemGroup>

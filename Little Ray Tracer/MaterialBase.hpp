@@ -4,6 +4,7 @@
 #include "LightBase.hpp"
 #include "Ray.hpp"
 #include "TextureBase.hpp"
+#include "NormalBase.hpp"
 
 // std
 #include <memory>
@@ -47,6 +48,9 @@ namespace LRT {
 
 		void blendColor(qbVector<double>& color1, const qbVector<double>& color2);
 
+		void AssignNormalMap(const std::shared_ptr<LRT::Normal::NormalBase>& inputNormalMap);
+		qbVector<double> PerturbNormal(const qbVector<double>& normal, const qbVector<double>& uvCoords);
+
 	public:
 		inline static int m_MaxReflectionRays;
 		inline static int m_ReflectionRayCount;
@@ -57,10 +61,12 @@ namespace LRT {
 		std::vector<std::shared_ptr<LRT::Texture::TextureBase>> m_TextureList;
 
 		bool m_HasTexture = false;
+		bool hasNormalMap_ = false;
 
-	private:
+		std::vector<std::shared_ptr<LRT::Normal::NormalBase>> normalMapList_;
 
-		
+		qbVector<double> localNormal_;
+
 	}; // MaterialBase
 
 } // LRT

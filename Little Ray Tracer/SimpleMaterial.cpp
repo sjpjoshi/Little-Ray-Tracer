@@ -8,21 +8,25 @@ qbVector<double> LRT::SimpleMaterial::ComputeColor(const std::vector<std::shared
 	// define the intial material colors
 	qbVector<double> matColor { 3 }; // materials
 	qbVector<double> refColor { 3 }; // reflective
-	qbVector<double> diffColor{ 3 };// diffuse
+	qbVector<double> diffColor{ 3 }; // diffuse
 	qbVector<double> spcColor { 3 }; // specular
 
+	// applys any normal maps that may have been assigned
+	qbVector<double> newNormal = localNormal;
+	if (m_HasTexture)
+		newNormal = PerturbNormal(newNormal, currentObject->m_UVCoords);
+
+	localNormal_ = newNormal; 
+
 	// Compute the diffuse component
-	if (!m_HasTexture) {
-		std::cout << "hi if (!m_HasTexture) ComputeColor" << std::endl;  
-		diffColor = computeDiffuseColor(objectList, lightList, currentObject, intPoint, localNormal, m_BaseColor);
-	}
-	else {
-		std::cout << "hi else ComputeColor" << std::endl;  
-		diffColor = computeDiffuseColor(objectList, lightList, currentObject, intPoint, localNormal, getTextureColor(currentObject->m_UVCoords)); 
-	}
+	if (!m_HasTexture) 
+		diffColor = computeDiffuseColor(objectList, lightList, currentObject, intPoint, newNormal, m_BaseColor); 
+	else 
+		diffColor = computeDiffuseColor(objectList, lightList, currentObject, intPoint, newNormal, getTextureColor(currentObject->m_UVCoords)); 
+	
 	// compute the reflection component
 	if (m_Reflectivity > 0.0)
-		refColor = computeReflectionColor(objectList, lightList, currentObject, intPoint, localNormal, cameraRay);
+		refColor = computeReflectionColor(objectList, lightList, currentObject, intPoint, newNormal, cameraRay);
 
 	// combine reflection and diffuse components
 	matColor = (refColor * m_Reflectivity) + (diffColor * (1 - m_Reflectivity));

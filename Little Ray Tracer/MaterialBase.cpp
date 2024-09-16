@@ -25,33 +25,33 @@ qbVector<double> LRT::MaterialBase::computeDiffuseColor(const std::vector<std::s
 	double blue = 0.0;
 	bool validIllum = false;
 	bool illumFound = false;
-	for (auto currentLight : lightList)
-	{
+	for (auto currentLight : lightList) {
 		validIllum = currentLight->computeIllumination(intPoint, localNormal, objectList, currentObject, color, intensity);
-		if (validIllum)
-		{
+		if (validIllum) {
 			illumFound = true;
 			red += color.GetElement(0) * intensity;
 			green += color.GetElement(1) * intensity;
 			blue += color.GetElement(2) * intensity;
-		}
-	}
 
-	if (illumFound)
-	{
-		std::cout << "hi if (illumFound) computeDiffuseColor" << std::endl;
+		} // if
+
+	} // for
+
+	if (illumFound) {
 		diffuseColor.SetElement(0, red *   baseColor.GetElement(0));
 		diffuseColor.SetElement(1, green * baseColor.GetElement(1));
-		diffuseColor.SetElement(2, blue *  baseColor.GetElement(2)); 
-	}
-	else
-	{
+		diffuseColor.SetElement(2, blue *  baseColor.GetElement(2));
+
+	} // if
+	else {
 		// The ambient light condition.
 		for (int i = 0; i < 3; ++i) {
 			std::cout << "hi computeDiffuseColor" << std::endl;
 			diffuseColor.SetElement(i, (m_AmbientColor.GetElement(i) * m_AmbientIntensity) * baseColor.GetElement(i));
-		}
-	}
+
+		} // for
+
+	} // else
 
 	// Return the material color.
 	return diffuseColor;
@@ -152,14 +152,9 @@ void LRT::MaterialBase::assignTexture(const std::shared_ptr<LRT::Texture::Textur
 qbVector<double> LRT::MaterialBase::getTextureColor(const qbVector<double>& uvCoords) {
 	qbVector<double> outputColor(4);
 	if (m_TextureList.size() > 1) {
-
 		outputColor = m_TextureList.at(0)->getColor(uvCoords);
-
-		for (int i = 1; i < m_TextureList.size(); ++i) {
-			std::cout << "hi getTextureColor" << std::endl;
+		for (int i = 1; i < m_TextureList.size(); ++i) 
 			blendColor(outputColor, m_TextureList.at(i)->getColor(uvCoords));
-
-		} // for
 
 	} // if
 	else
@@ -173,3 +168,22 @@ void LRT::MaterialBase::blendColor(qbVector<double>& color1, const qbVector<doub
 	color1 = (color2 * color2.GetElement(3)) + (color1 * (1.0 - color2.GetElement(3)));
 
 } // blendColor
+
+void LRT::MaterialBase::AssignNormalMap(const std::shared_ptr<LRT::Normal::NormalBase>& inputNormalMap) {
+	normalMapList_.push_back(inputNormalMap);
+	hasNormalMap_ = true;
+
+} // AssignNormalMap
+
+qbVector<double> LRT::MaterialBase::PerturbNormal(const qbVector<double>& normal, const qbVector<double>& uvCoords) {
+	// Copy the original normal.
+	qbVector<double> newNormal = normal;
+
+	// Perturb the new normal with each normal map in turn.
+	for (int i = 0; i < normalMapList_.size(); ++i)
+		newNormal = normalMapList_.at(i)->ComputePerturbation(newNormal, uvCoords); 
+	
+	// And return the output.
+	return newNormal;
+
+} // PerturbNormal

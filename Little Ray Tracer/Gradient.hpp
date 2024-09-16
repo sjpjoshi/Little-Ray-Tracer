@@ -12,6 +12,9 @@ namespace LRT {
 
 			virtual qbVector<double> getColor(const qbVector<double>& uvCoords); 
 			void setStop(double position, const qbVector<double>& value);
+			virtual double GetValue(const qbVector<double>& uvCoords) override;
+
+
 
 		private:
 			LRT::Texture::ColorMap m_ColorMap;

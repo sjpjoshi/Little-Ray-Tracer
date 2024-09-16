@@ -21,6 +21,7 @@ namespace LRT {
 			void setTransform(const qbVector<double>& translation, const double &rotation, const qbVector<double>& scale);
 			static qbVector<double> blendColors(const std::vector<qbVector<double>>& inputColorList);
 			qbVector<double> applyTransform(const qbVector<double>& inputVector);
+			virtual double GetValue(const qbVector<double>& uvCoords);
 
 		private:
 

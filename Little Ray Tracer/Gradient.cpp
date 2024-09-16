@@ -17,3 +17,11 @@ void LRT::Texture::Gradient::setStop(double position, const qbVector<double>& va
 	m_ColorMap.setStop(position, value);
 
 } // setStop
+
+double LRT::Texture::Gradient::GetValue(const qbVector<double>& uvCoords) {
+	// Apply the local transform to the (u,v) coordinates.
+	qbVector<double> inputLoc = uvCoords;
+	qbVector<double> newLoc = applyTransform(inputLoc);
+	return std::min((newLoc.GetElement(0) + 1.0) / 2.0, 1.0);
+
+} // GetValue

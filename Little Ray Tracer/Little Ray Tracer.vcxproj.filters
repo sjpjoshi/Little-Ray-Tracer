@@ -67,6 +67,12 @@
     <Filter Include="Source Files\Noise">
       <UniqueIdentifier>{dc6acd03-6c80-4a64-aaaa-1002f26fa8e2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Normals">
+      <UniqueIdentifier>{ee0174e6-67b0-46e8-9f1d-6de620ee8bd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Normals">
+      <UniqueIdentifier>{722168ed-a68b-4f96-8c30-11671bf471c0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -183,6 +189,15 @@
     <ClCompile Include="Marble.cpp">
       <Filter>Source Files\Textures</Filter>
     </ClCompile>
+    <ClCompile Include="NormalBase.cpp">
+      <Filter>Source Files\Normals</Filter>
+    </ClCompile>
+    <ClCompile Include="Constants.cpp">
+      <Filter>Source Files\Normals</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleRough.cpp">
+      <Filter>Source Files\Normals</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -280,6 +295,15 @@
     </ClInclude>
     <ClInclude Include="Marble.hpp">
       <Filter>Header Files\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalBase.hpp">
+      <Filter>Header Files\Normals</Filter>
+    </ClInclude>
+    <ClInclude Include="Constants.hpp">
+      <Filter>Header Files\Normals</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleRough.hpp">
+      <Filter>Header Files\Normals</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

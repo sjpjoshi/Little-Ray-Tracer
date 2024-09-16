@@ -139,6 +139,7 @@
     <ClCompile Include="Checker.cpp" />
     <ClCompile Include="ColorMap.cpp" />
     <ClCompile Include="Cone.cpp" />
+    <ClCompile Include="Constants.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Cube.hpp" />
     <ClCompile Include="Cylinder.cpp" />
@@ -152,6 +153,7 @@
     <ClCompile Include="Marble.cpp" />
     <ClCompile Include="MaterialBase.cpp" />
     <ClCompile Include="NoiseBase.cpp" />
+    <ClCompile Include="NormalBase.cpp" />
     <ClCompile Include="ObjectBase.cpp" />
     <ClCompile Include="ObjectPlane.cpp" />
     <ClCompile Include="ObjectSphere.cpp" />
@@ -162,6 +164,7 @@
     <ClCompile Include="SDF.cpp" />
     <ClCompile Include="SimpleMaterial.cpp" />
     <ClCompile Include="SimpleRefractive.cpp" />
+    <ClCompile Include="SimpleRough.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Sphere.hpp" />
     <ClCompile Include="TextureBase.cpp" />
@@ -179,6 +182,7 @@
     <ClInclude Include="Checker.hpp" />
     <ClInclude Include="ColorMap.hpp" />
     <ClInclude Include="Cone.hpp" />
+    <ClInclude Include="Constants.hpp" />
     <ClInclude Include="Cylinder.hpp" />
     <ClInclude Include="Flat.hpp" />
     <ClInclude Include="GradidentNoiseGenerator.hpp" />
@@ -189,6 +193,7 @@
     <ClInclude Include="Marble.hpp" />
     <ClInclude Include="MaterialBase.hpp" />
     <ClInclude Include="NoiseBase.hpp" />
+    <ClInclude Include="NormalBase.hpp" />
     <ClInclude Include="ObjectBase.hpp" />
     <ClInclude Include="ObjectPlane.hpp" />
     <ClInclude Include="ObjectSphere.hpp" />
@@ -200,6 +205,7 @@
     <ClInclude Include="Scene.hpp" />
     <ClInclude Include="SDF.hpp" />
     <ClInclude Include="SimpleRefractive.hpp" />
+    <ClInclude Include="SimpleRough.hpp" />
     <ClInclude Include="TextureBase.hpp" />
     <ClInclude Include="TImage.hpp" />
     <ClInclude Include="Torus.hpp" />

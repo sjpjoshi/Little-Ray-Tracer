@@ -56,3 +56,9 @@ qbVector<double> LRT::Texture::TextureBase::applyTransform(const qbVector<double
 	return output;
 
 } // applyTransform
+
+double LRT::Texture::TextureBase::GetValue(const qbVector<double>& uvCoords) {
+	// Return a default value.
+	return 0.0;
+
+} // getValue

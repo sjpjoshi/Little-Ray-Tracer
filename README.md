@@ -1,7 +1,7 @@
 # Little Ray Tracer
 
 ## Overview
-Little Ray Tracer is a lightweight ray tracing engine written in C++ using SDL2, the STL library, and a custom-made linear algebra library. This project demonstrates essential ray tracing principles, including geometric transforms, lighting, and textures, optimized for efficient rendering.
+Little Ray Tracer is a lightweight ray tracing engine written in C++ using SDL2, the STL library, and a custom-made linear algebra library. This project demonstrates essential ray tracing principles, including geometric transforms, lighting, and textures, PBR, and optimized for efficient rendering.
 This project is for educational purposes only, this is a learning experience for me. 
 
 ## Features

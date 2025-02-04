@@ -46,5 +46,3 @@ _Description_: Example showcasing UV space and image texture mapping on geometri
 - [ ] Global Illumination
 - [ ] Advanced camera effects (e.g. depth of field, motion blur)
 
-## License
-This project is licensed under the MIT License. See the LICENSE file for details.

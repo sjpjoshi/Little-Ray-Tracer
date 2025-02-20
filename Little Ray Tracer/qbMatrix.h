@@ -1,41 +1,5 @@
-// This file is part of the qbLinAlg linear algebra library.
-
-/*
-MIT License
-Copyright (c) 2023 Michael Bennett	
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software
-and associated documentation files (the "Software"), to deal in the Software without restriction, 
-including without limitation the rights to use, copy, modify, merge, publish, distribute, 
-sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is 
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or 
-substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING 
-BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND 
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, 
-DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-*/
-
 #ifndef QBMATRIX2_H
 #define QBMATRIX2_H
-
-/* *************************************************************************************************
-
-	qbMatrix2
-	
-	Class to provide capability to handle two-dimensional matrices.
-
-	Created as part of the qbLinAlg linear algebra library, which is intended to be primarily for
-	educational purposes. For more details, see the corresponding videos on the QuantitativeBytes
-	YouTube channel at:
-	
-	www.youtube.com/c/QuantitativeBytes								
-
-************************************************************************************************* */
 
 #include <stdexcept>
 #include <iostream>
@@ -620,14 +584,6 @@ bool qbMatrix2<T>::operator== (const qbMatrix2<T>& rhs)
 	return flag;
 }
 
-/* **************************************************************************************************
-THE ASSIGNMENT (=) OPERATOR
-Note the changes that have been made since the videos about this first code were made. The original
-code has been left, but commented out. Ultimately it was necessary to make some changes to 
-improve the performance of these functions in terms of run time.
-See this episode of my ray tracing in C++ series for further information:
-https://youtu.be/-5kLk7_bs0U
-/* *************************************************************************************************/
 /*
 template <class T>
 qbMatrix2<T> qbMatrix2<T>::operator= (const qbMatrix2<T> &rhs)
